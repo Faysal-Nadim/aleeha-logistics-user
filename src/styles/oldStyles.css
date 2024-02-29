@@ -1,0 +1,465 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+*/
+
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+}
+
+body {
+  background-color: #1a1a1a;
+  padding: 0;
+  margin: 0;
+}
+p,
+a {
+  color: white;
+}
+.scrollable_element {
+  scrollbar-width: none;
+}
+
+.bg_prim {
+  background-color: #1a1a1a;
+}
+.bg_sec {
+  background-color: #2d2d2d;
+}
+.bg_sec_light {
+  background-color: #313131;
+}
+.bg_modal {
+  background-color: #2d2d2d;
+}
+
+.bg-nutral {
+  background-color: #f8f8f8;
+}
+.primary-red {
+  color: #FF3624;
+}
+
+.text-dark {
+  color: #2e2c34;
+}
+.text-light {
+  color: #504f54;
+}
+
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+.nav_menu > li {
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.prim_text_xs_reg {
+  font-size: 10px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_xs_reg {
+  font-size: 10px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+.prim_text_sm_reg {
+  font-size: 12px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_sm_reg {
+  font-size: 12px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+.prim_text_sm {
+  font-size: 12px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_sm {
+  font-size: 12px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 600;
+}
+.prim_text_md {
+  font-size: 14px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_md {
+  font-size: 14px;
+  /* color: white; */
+  font-family: Manrope;
+  /* font-weight: 600; */
+}
+.prim_text_md_reg {
+  font-size: 14px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_md_reg {
+  font-size: 14px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+
+.prim_text_lg_reg {
+  font-size: 16px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_lg_reg {
+  font-size: 16px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+.prim_text_lg {
+  font-size: 16px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_lg {
+  font-size: 16px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 600;
+}
+
+.prim_text_reg_exlg {
+  font-size: 18px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_reg_exlg {
+  font-size: 18px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+.prim_text_exlg {
+  font-size: 18px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_exlg {
+  font-size: 18px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 600;
+}
+
+.prim_text_xl_reg {
+  font-size: 20px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 400;
+}
+.sec_text_xl_reg {
+  font-size: 20px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 400;
+}
+.prim_text_xl {
+  font-size: 20px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_xl {
+  font-size: 20px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 600;
+}
+.prim_text_2xl {
+  font-size: 24px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 600;
+}
+.sec_text_2xl {
+  font-size: 24px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 600;
+}
+
+.prim_text_5xl_b {
+  font-size: 36px;
+  /* color: white; */
+  font-family: Sora;
+  font-weight: 700;
+}
+.sec_text_5xl_b {
+  font-size: 36px;
+  /* color: white; */
+  font-family: Manrope;
+  font-weight: 700;
+}
+
+.btn_primary {
+  min-height: 53px;
+  background-color: #FF3624;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+}
+.btn_prim_user_db {
+  min-height: 50px;
+  background-color: #444444;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+  padding: 2px 12px;
+}
+.btn_sec_user_db {
+  min-height: 50px;
+  background-color: #2e2d36;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+  padding: 6px 20px;
+  border: 1px solid #444444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_gray {
+  max-width: 130px;
+  min-height: 53px;
+  background-color: #444444;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+}
+.btn_gray_update {
+  min-width: 78px;
+  min-height: 42px;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+}
+.btn_gray_md {
+  min-height: 50px;
+  background-color: #f5f4fe;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-family: "Sora";
+  padding: 6px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+.btn_outline {
+  padding: 10px 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 8px;
+}
+.white_btn {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  font-family: Sora;
+  border-radius: 14px;
+}
+
+.white_btn_outline {
+  padding: 10px 14px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 14px;
+}
+
+.nav_btn {
+  padding: 6px 10px;
+  background-color: #424242;
+  border-radius: 14px;
+}
+.white_btn_outline_lg {
+  height: 50px;
+  width: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #424242;
+  border-radius: 14px;
+}
+
+/* LOADING ANIMATION CSS */
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}

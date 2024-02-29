@@ -1,0 +1,32 @@
+{
+  "name": "AleehaLogistics-ecom-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@paypal/react-paypal-js": "^8.1.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.1",
+    "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "daisyui": "^2.52.0",
+    "next": "^13.4.9",
+    "nuka-carousel": "^6.0.3",
+    "postcss": "8.4.24",
+    "react": "18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "18.2.0",
+    "react-modal": "^3.16.1",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "sweetalert2": "^11.7.12",
+    "tailwindcss": "3.3.2"
+  }
+}

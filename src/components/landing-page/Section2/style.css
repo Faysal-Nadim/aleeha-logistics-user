@@ -1,0 +1,7 @@
+  .rect{
+   fill: none;
+   stroke: #FF3624;
+   stroke-width: 8px;
+   stroke-linejoin: round;
+   stroke-linecap: round;
+  }
