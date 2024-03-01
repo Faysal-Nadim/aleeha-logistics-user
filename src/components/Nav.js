@@ -90,6 +90,10 @@ const Nav = () => {
                 {" "}
                 Winners
               </Link>
+              <Link rel="canonical" href={"/product"}>
+                {" "}
+                Product
+              </Link>
             </div>
           </div>
           {/* CURRENCY, PERSONAL DETAILTS, REG LOGIN, CART */}

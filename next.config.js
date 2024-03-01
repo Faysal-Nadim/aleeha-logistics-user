@@ -5,18 +5,19 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.ibb.co",
-        // ...
       },
 
       {
         protocol: "https",
-        hostname: "https://www.pexels.com/",
-        // ...
+        hostname: "cbu01.alicdn.com",
       },
       {
         protocol: "https",
-        hostname: "AleehaLogistics-storage.s3.me-central-1.amazonaws.com",
-        // ...
+        hostname: "itemcdn.tmall.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cloud.video.taobao.com",
       },
     ],
   },

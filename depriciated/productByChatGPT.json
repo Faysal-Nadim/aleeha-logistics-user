@@ -1,0 +1,68 @@
+{
+    "productTitle": "Floral brand gift box, with little bears, Birthday gift, wholesale",
+    "rating": {
+        "average": 5,
+        "monthlySales": 69759
+    },
+    "prices": [
+        {
+            "quantityRange": "1 - 19 pieces",
+            "price": 198.42
+        },
+        {
+            "quantityRange": "20 - 39 pieces",
+            "price": 154.52
+        },
+        {
+            "quantityRange": "≥40 pieces",
+            "price": 143.02
+        }
+    ],
+    "variations": [
+        {
+            "color": "red",
+            "price": 198.42,
+            "stock": 87024,
+            "image": "https://cbu01.alicdn.com/img/ibank/2016/107/491/3716194701_1782568519.100x100.jpg"
+        },
+        {
+            "color": "pink",
+            "price": 198.42,
+            "stock": 94926,
+            "image": "https://cbu01.alicdn.com/img/ibank/2016/165/521/3718125561_1782568519.100x100.jpg"
+        }
+    ],
+    "domesticDeliveryCharge": 0,
+    "mainImage": "https://cbu01.alicdn.com/img/ibank/2016/107/491/3716194701_1782568519.100x100.jpg",
+    "imageArray": [
+        "https://cbu01.alicdn.com/img/ibank/2016/107/491/3716194701_1782568519.100x100.jpg",
+        "https://cbu01.alicdn.com/img/ibank/2016/165/521/3718125561_1782568519.100x100.jpg"
+    ],
+    "productSpecification": {
+        "material": "Floral",
+        "theme": "Birthday",
+        "contents": "Gift box with little bears"
+    },
+    "productDetails": [
+        {
+            "text": "High-quality floral pattern",
+            "image": "https://example.com/image1.jpg"
+        },
+        {
+            "text": "Cute little bears included in the box",
+            "image": "https://example.com/image2.jpg"
+        }
+    ],
+    "reviews": [
+        {
+            "user": "User123",
+            "rating": 5,
+            "comment": "Absolutely adorable! My friend loved this as her birthday gift."
+        },
+        {
+            "user": "Customer456",
+            "rating": 4,
+            "comment": "Great product, but packaging could be better."
+        }
+    ]
+}

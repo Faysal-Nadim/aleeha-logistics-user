@@ -183,30 +183,6 @@ const Footer = () => {
           </div>
         </div>
 
-        <div
-          // className="flex flex-col lg:justify-start md:justify-center sm:justify-center gap-3"
-          className="flex lg:flex-row md:flex-row sm:flex-col lg:justify-center md:justify-start sm:justify-start gap-4 mt-12"
-        >
-          {getUsOn?.map((x, index) => {
-            return (
-              <a
-                rel="canonical"
-                key={index}
-                href={x?.link}
-                target="_blank"
-                className="border border-[#010101] rounded-xl py-2  px-2.5 max-w-[220px] hover:scale-95 transition-all ease-in-out flex justify-center items-center gap-2.5"
-              >
-                <Image src={x?.icon} height={10} width={37} alt={x?.name} />
-                <div className="w-[110px]">
-                  <p className="text-[12px]">{x?.motive}</p>
-                  <p className="text-[14px] font-semibold font-mr ">
-                    {x?.name}
-                  </p>
-                </div>
-              </a>
-            );
-          })}
-        </div>
         <div className="w-full flex justify-center items-center">
           <div className="p-2 bg_sec absolute  lg:w-11/12 sm:w-full  rounded-[6px] lg:bottom-[-10px] sm:bottom-0" />
         </div>

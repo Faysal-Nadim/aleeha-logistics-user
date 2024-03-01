@@ -15,7 +15,7 @@ const LoadingComponent = () => {
           width={110}
         />
         <div className="">
-          <div class="lds-ripple">
+          <div className="lds-ripple">
             <div></div>
             <div></div>
           </div>
@@ -33,7 +33,7 @@ const LoadingComponent = () => {
         width={110}
       />
       <div className="">
-        <div class="lds-ellipsis">
+        <div className="lds-ellipsis">
           <div></div>
           <div></div>
           <div></div>
@@ -52,7 +52,7 @@ const LoadingComponent = () => {
         width={110}
       />
       <div className="">
-        <div class="lds-facebook">
+        <div className="lds-facebook">
           <div></div>
           <div></div>
           <div></div>

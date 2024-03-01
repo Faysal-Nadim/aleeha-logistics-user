@@ -18,7 +18,7 @@ import dubaided_black_long from "./footer/dubaied_black_long.png";
 import dubaided_black_horizontal from "./footer/dubaided_black_horizontal.png";
 
 //LOADING
-import loadingAnimation from "./logo/AleehaLogistics-Logo-1.png";
+import loadingAnimation from "./logo/Winly-Logo-1.png";
 
 // LANDING PAGE IMAGES
 

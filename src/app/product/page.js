@@ -11,6 +11,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { useDispatch, useSelector } from "react-redux";
 import { shareSvg } from "../../../public/assets/Icons";
 import ProductsDetails from "@components/Depricited/ProductsDetails";
+import Link from "next/link";
 
 const products = [
   {
@@ -708,7 +709,13 @@ export default function page() {
                       </p>
 
                       <div className="flex lg:my-0 sm:my-auto gap-2 absolute bottom-6">
-                        <button
+                        <Link
+                          href={`/product/${item?._id}`}
+                          className="lg:text-[10px] sm:text-[10px] bg-[#202020] px-4 lg:py-2 sm:py-2 rounded-[14px] text-[16px] font-semibold primary_text_color "
+                        >
+                          Prize Details
+                        </Link>
+                        {/* <button
                           onClick={() => {
                             setPriceDetails(item);
                             setShow(true);
@@ -717,7 +724,7 @@ export default function page() {
                           className="lg:text-[10px] sm:text-[10px] bg-[#202020] px-4 lg:py-2 sm:py-2 rounded-[14px] text-[16px] font-semibold primary_text_color "
                         >
                           Prize Details
-                        </button>
+                        </button> */}
                         <button
                           type=""
                           className="lg:text-[10px] sm:text-[10px] bg-primary px-4 lg:py-2 sm:py-2 rounded-[14px] font-semibold primary_text_color"
