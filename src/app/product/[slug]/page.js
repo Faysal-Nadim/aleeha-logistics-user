@@ -456,6 +456,12 @@ const page = ({ params }) => {
         </div>
 
         <div className="max-w-[490px]">
+          <p className="mb-6">
+            Buying Agent Process?{" "}
+            <span className="font-semibold text-[#F79602]">
+              3 Must Reads Before Purchase
+            </span>{" "}
+          </p>
           <p className="text-xl font-medium mb-4">{data?.title}</p>
           <div className="flex justify-between items-center mb-4 font-medium text-[#5D6154]">
             <p className=" font-medium text-[#5D6154]">Rating: {5.0}</p>
@@ -496,7 +502,7 @@ const page = ({ params }) => {
           </div>
 
           {/* PRODUCT QUANTITY */}
-          <div>
+          <div className="mt-6">
             {/* HEADER */}
             <div className="flex gap-2 uppercase justify-between px-4 py-2 bg-[#ECECEC]  font-bold  rounded-[4px] mb-4">
               <p className="lg:w-[100px] md:w-[60px] sm:w-[40px] text-[#5D6154]">
@@ -569,8 +575,61 @@ const page = ({ params }) => {
           </div>
         </div>
 
-        <div className="min-w-[270px]">
-          <div className="bg-[#F9F9F9]"></div>
+        <div className="lg:max-w-[270px] md:max-w-[270px] sm:w-full">
+          <div className="bg-[#F9F9F9] rounded-lg p-4 mb-8">
+            <div className="flex justify-between gap-1.5   font-semibold  mb-3">
+              <p>0 Pieces</p>
+              <p>BDT 0 </p>
+            </div>
+            <div className="flex justify-between gap-1.5   font-semibold  mb-6">
+              <p className=" text-sm">Domestic Shipping Charge</p>
+              <p>BDT 0 </p>
+            </div>
+            <div className="flex justify-between gap-1.5  font-semibold text-[#5D6154] border-t border-dashed border-t-[#5D6154] pt-4 mb-2.5">
+              <p>Total</p>
+              <p>BDT 485.17 * </p>
+            </div>
+            <p className="text-xs text-red-500 text-right mb-8">
+              *Shipping Charge will be include later
+            </p>
+
+            <button
+              type=""
+              className="bg-[#F79602] py-2 w-full text-white rounded font-semibold mb-4"
+            >
+              BUY NOW
+            </button>
+            <button
+              type=""
+              className="bg-[#F79602] py-2 w-full text-white  rounded font-semibold mb-4"
+            >
+              ADD TO CART
+            </button>
+          </div>
+
+          {/* Seller Details */}
+          <div className="bg-[#F9F9F9]  rounded-lg p-4 mb-8">
+            <p className="font-semibold mb-2.5">Seller Details</p>
+
+            <p className="font-semibold  mb-6">
+              Name:{data?.shop_info?.shop_name}
+            </p>
+
+            <button
+              type=""
+              className="bg-[#F79602] py-2 w-full rounded-full text-white mb-4"
+            >
+              View Store
+            </button>
+          </div>
+
+          <div className="bg-[#F9F9F9]  rounded-lg p-4 mb-8">
+            <p className="font-semibold mb-2.5"> Guarantee</p>
+            <p className="font-semibold  mb-1.5"> ✔ 100% Refund</p>
+            <p className="font-semibold   mb-1.5"> ✔ Detailed Inspection</p>
+            <p className="font-semibold   mb-1.5"> ✔ Handle with care</p>
+            <p className="font-semibold   mb-1.5"> ✔ Lower exchange loss</p>
+          </div>
         </div>
       </div>
 

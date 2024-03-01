@@ -25,21 +25,25 @@
   width: 100vw;
   min-height: 100vh;
   /* background-color: #1a1a1a; */
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
 }
 
 body {
   /* background-color: #1a1a1a; */
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  background-color: #ffffff;
   padding: 0;
   margin: 0;
 }
+
 .primary_text_color {
   color: #000;
 }
+
 .secondary_text_color {
   color: white;
 }
+
 .offset_color {
   color: #84818a;
 }
@@ -48,6 +52,7 @@ p,
 a {
   color: black;
 }
+
 .scrollable_element {
   scrollbar-width: none;
 }
@@ -55,26 +60,32 @@ a {
 .bg_prim_nav {
   /* background-color: #1a1a1a; */
 
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  background-color: #ffffff;
 }
+
 .bg_prim {
   /* background-color: #1a1a1a; */
 
   background-color: #f8f8f8;
 }
+
 .bg_sec {
   /* background-color: #2d2d2d; */
   background-color: white;
 }
+
 .bg_sec_light {
   /* background-color: #313131; */
   /* background-color: #eeeeee; */
   background-color: #fff;
 }
+
 .bg_modal {
   /* background-color: #2d2d2d; */
   background-color: #eeeeee;
 }
+
 .input_border_color {
   border: #eeeeee;
 }
@@ -82,6 +93,7 @@ a {
 .bg-nutral {
   background-color: #f8f8f8;
 }
+
 .primary-red {
   color: #ff3624;
 }
@@ -89,6 +101,7 @@ a {
 .text-dark {
   color: #2e2c34;
 }
+
 .text-light {
   color: #504f54;
 }
@@ -98,7 +111,7 @@ a {
   text-align: center;
 }
 
-.nav_menu > li {
+.nav_menu>li {
   margin-bottom: 32px;
   font-size: 14px;
 }
@@ -109,54 +122,63 @@ a {
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_xs_reg {
   font-size: 8px;
 
   font-family: Manrope;
   font-weight: 400;
 }
+
 .prim_text_sm_reg {
   font-size: 10px;
 
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_sm_reg {
   font-size: 10px;
 
   font-family: Manrope;
   font-weight: 400;
 }
+
 .prim_text_sm {
   font-size: 10px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_sm {
   font-size: 10px;
 
   font-family: Manrope;
   font-weight: 600;
 }
+
 .prim_text_md {
   font-size: 12px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_md {
   font-size: 12px;
 
   font-family: Manrope;
   /* font-weight: 600; */
 }
+
 .prim_text_md_reg {
   font-size: 12px;
 
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_md_reg {
   font-size: 12px;
 
@@ -170,18 +192,21 @@ a {
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_lg_reg {
   font-size: 14px;
 
   font-family: Manrope;
   font-weight: 400;
 }
+
 .prim_text_lg {
   font-size: 14px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_lg {
   font-size: 14px;
 
@@ -195,18 +220,21 @@ a {
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_reg_exlg {
   font-size: 16px;
 
   font-family: Manrope;
   font-weight: 400;
 }
+
 .prim_text_exlg {
   font-size: 16px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_exlg {
   font-size: 16px;
 
@@ -220,30 +248,35 @@ a {
   font-family: Sora;
   font-weight: 400;
 }
+
 .sec_text_xl_reg {
   font-size: 18px;
 
   font-family: Manrope;
   font-weight: 400;
 }
+
 .prim_text_xl {
   font-size: 18px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_xl {
   font-size: 18px;
 
   font-family: Manrope;
   font-weight: 600;
 }
+
 .prim_text_2xl {
   font-size: 22px;
 
   font-family: Sora;
   font-weight: 600;
 }
+
 .sec_text_2xl {
   font-size: 22px;
 
@@ -257,12 +290,14 @@ a {
   font-family: Sora;
   font-weight: 700;
 }
+
 .prim_text_5xl_b {
   font-size: 34px;
 
   font-family: Sora;
   font-weight: 700;
 }
+
 .sec_text_5xl_b {
   font-size: 34px;
 
@@ -293,6 +328,7 @@ a {
   font-size: 600;
   font-family: "Sora";
 }
+
 .btn_prim_user_db {
   min-height: 40px;
   /* background-color: #444444; */
@@ -303,6 +339,7 @@ a {
   font-family: "Sora";
   padding: 2px 12px;
 }
+
 .btn_sec_user_db {
   min-height: 40px;
   background-color: #2e2d36;
@@ -317,6 +354,7 @@ a {
   justify-content: center;
   align-items: center;
 }
+
 .btn_gray {
   max-width: 130px;
   min-height: 53px;
@@ -327,6 +365,7 @@ a {
   font-size: 16px;
   font-family: "Sora";
 }
+
 .btn_gray_update {
   min-width: 68px;
   min-height: 36px;
@@ -335,6 +374,7 @@ a {
   font-size: 16px;
   font-family: "Sora";
 }
+
 .btn_gray_control_cart_count {
   min-width: 48px;
   min-height: 36px;
@@ -343,6 +383,7 @@ a {
   font-size: 14px;
   font-family: "Sora";
 }
+
 .btn_gray_md {
   min-height: 50px;
   background-color: #f5f4fe;
@@ -356,6 +397,7 @@ a {
   align-items: center;
   color: #000;
 }
+
 .btn_outline {
   padding: 10px 20px;
   border-style: solid;
@@ -363,6 +405,7 @@ a {
   border-color: #eeeeee;
   border-radius: 8px;
 }
+
 .btn_outline_sm {
   padding: 6px 16px;
   border-style: solid;
@@ -370,6 +413,7 @@ a {
   border-color: #eeeeee;
   border-radius: 6px;
 }
+
 .white_btn {
   padding: 10px 20px;
   background-color: white;
@@ -399,6 +443,7 @@ a {
   background-color: #424242;
   border-radius: 12px;
 }
+
 .white_btn_outline_lg {
   height: 50px;
   width: 57px;
@@ -417,6 +462,7 @@ a {
   width: 80px;
   height: 80px;
 }
+
 .lds-ripple div {
   position: absolute;
   border: 4px solid #000;
@@ -424,9 +470,11 @@ a {
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
+
 @keyframes lds-ripple {
   0% {
     top: 36px;
@@ -435,6 +483,7 @@ a {
     height: 0;
     opacity: 0;
   }
+
   4.9% {
     top: 36px;
     left: 36px;
@@ -442,6 +491,7 @@ a {
     height: 0;
     opacity: 0;
   }
+
   5% {
     top: 36px;
     left: 36px;
@@ -449,6 +499,7 @@ a {
     height: 0;
     opacity: 1;
   }
+
   100% {
     top: 0px;
     left: 0px;
@@ -457,12 +508,14 @@ a {
     opacity: 0;
   }
 }
+
 .lds-ellipsis {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
+
 .lds-ellipsis div {
   position: absolute;
   top: 33px;
@@ -472,42 +525,52 @@ a {
   background: #000;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
+
 .lds-ellipsis div:nth-child(1) {
   left: 8px;
   animation: lds-ellipsis1 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(2) {
   left: 8px;
   animation: lds-ellipsis2 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(3) {
   left: 32px;
   animation: lds-ellipsis2 0.6s infinite;
 }
+
 .lds-ellipsis div:nth-child(4) {
   left: 56px;
   animation: lds-ellipsis3 0.6s infinite;
 }
+
 @keyframes lds-ellipsis1 {
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 @keyframes lds-ellipsis3 {
   0% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(0);
   }
 }
+
 @keyframes lds-ellipsis2 {
   0% {
     transform: translate(0, 0);
   }
+
   100% {
     transform: translate(22px, 0);
   }
@@ -519,6 +582,7 @@ lds-facebook {
   width: 80px;
   height: 80px;
 }
+
 .lds-facebook div {
   display: inline-block;
   position: absolute;
@@ -527,23 +591,28 @@ lds-facebook {
   background: #000;
   animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
+
 .lds-facebook div:nth-child(1) {
   left: 8px;
   animation-delay: -0.24s;
 }
+
 .lds-facebook div:nth-child(2) {
   left: 32px;
   animation-delay: -0.12s;
 }
+
 .lds-facebook div:nth-child(3) {
   left: 56px;
   animation-delay: 0;
 }
+
 @keyframes lds-facebook {
   0% {
     top: 8px;
     height: 64px;
   }
+
   50%,
   100% {
     top: 22px;
