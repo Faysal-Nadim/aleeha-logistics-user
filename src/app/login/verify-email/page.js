@@ -1,6 +1,10 @@
 "use client";
 
-import { requestCode, verifyCode } from "@app/redux/actions";
+import {
+  requestCode,
+  sendVerificationCodeByEmail,
+  verifyCode,
+} from "@app/redux/actions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,7 +24,7 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     const email = searchParams.get("email");
-    dispatch(requestCode({ email: email }));
+    dispatch(sendVerificationCodeByEmail({ email: email }));
     setEmail(email);
   }, [searchParams]);
 

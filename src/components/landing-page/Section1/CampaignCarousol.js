@@ -2,11 +2,8 @@
 import Carousel from "nuka-carousel";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PrizeDetailsModule from "../shared/PrizeDetailsModule";
 import CampaignCard from "./CampaignCard";
-import heroCampaignData from "../../../../public/heroCampaignData";
 import AddToCartDetailsModule from "../shared/AddToCartDetailsModule";
-let heroData = heroCampaignData;
 
 const CampaignCarousol = () => {
   const [show, setShow] = useState(false);
@@ -26,7 +23,7 @@ const CampaignCarousol = () => {
 
   return (
     <section className="w-full h-full">
-      <Carousel
+      {/* <Carousel
         slidesToShow={1}
         slidesToScroll={1}
         cellAlign="left"
@@ -62,7 +59,7 @@ const CampaignCarousol = () => {
           setShow={setShow}
           setPriceDetails={setPriceDetails}
         />
-      </Carousel>
+      </Carousel> */}
 
       {
         <AddToCartDetailsModule

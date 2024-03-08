@@ -13,14 +13,7 @@ const formInputCss =
   "p-1 focus:outline-none bg-transparent sec_text_xl primary_text_color w-full max-width-className";
 const formInputWarningCss = "sec_text_sm text-red-500";
 const formInputLabelCss = "prim_text_sm_reg offset_color";
-// const formDivCss =
-//   "form-control bg-info px-6 py-2 rounded-[16px] w-full max-width-className";
-// const formInputCss =
-//   "p-1 focus:outline-none bg-transparent sec_text_xl primary_text_color w-full max-width-className";
-// const formInputWarningCss = "sec_text_sm text-red-500";
-// const formInputLabelCss = "prim_text_sm_reg primary_text_color";
 
-const countryData = require("../../../../public/CountryCodes.json");
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -32,7 +25,6 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    // backgroundColor: "#1A1A1A",
     backgroundColor: "#f8f8f8",
     padding: 50,
     borderRadius: 20,
@@ -51,12 +43,7 @@ const PersoalDetails = () => {
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
   const [email, setEmail] = useState(user?.email);
-  const [gender, setGender] = useState(user?.gender);
-  const [country, setCountry] = useState(user?.country);
-  const [nationality, setNationality] = useState(user?.nationality);
-  const [dob, setDob] = useState(user?.dob);
   const [phone, setPhone] = useState(user?.phone);
-  const [dialCode, setDialCode] = useState(user?.dialCode);
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
 
@@ -66,13 +53,8 @@ const PersoalDetails = () => {
     const data = {
       firstName,
       lastName,
-      gender,
-      country,
-      dob,
       phone,
-      dialCode,
       password,
-      nationality,
     };
     dispatch(updateProfile(data));
     e.preventDefault();
@@ -84,17 +66,12 @@ const PersoalDetails = () => {
     if (
       user?.firstName !== firstName ||
       user?.lastName !== lastName ||
-      user?.phone !== phone ||
-      user?.gender !== gender ||
-      user?.country !== country ||
-      user?.nationality !== nationality ||
-      user?.dob !== dob ||
-      user?.dialCode !== dialCode
+      user?.phone !== phone
     )
       setDisableUpdateBtn((state) => {
         !state;
       });
-  }, [firstName, lastName, gender, country, dob, phone, dialCode, nationality]);
+  }, [firstName, lastName, phone]);
 
   if (auth.loading === true) {
     Swal.showLoading();
@@ -122,6 +99,7 @@ const PersoalDetails = () => {
               <span className={formInputWarningCss}></span>
             </label>
           </div>
+
           <div className={formDivCss}>
             <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
               <span className={formInputLabelCss}>Last Name</span>
@@ -145,9 +123,9 @@ const PersoalDetails = () => {
             </label>
             <input
               type="text"
-              placeholder="DD/MM/YYYY"
+              placeholder="Email"
               className={formInputCss}
-              name="dob"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={true}
@@ -156,70 +134,26 @@ const PersoalDetails = () => {
               <span className={formInputWarningCss}></span>
             </label>
           </div>
-          <div
-            className={
-              "bg-info px-6 py-2 rounded-[16px] w-full max-width-className flex gap-4"
-            }
-          >
-            <div className="w-1/4">
-              <label className="label  lg:pt-[6px] sm:py-[4px] px-[4px] ">
-                <span className={formInputLabelCss}>Code</span>
-              </label>
-              <select
-                type="select"
-                className={
-                  "select border-info ml-[-12px] sec_text_xl primary_text_color bg-info"
-                }
-                value={dialCode}
-                onChange={(e) => setDialCode(e.target.value)}
-              >
-                {countryData.map((country) => (
-                  <option
-                    className="bg-info text-[14px] max-w-[80px]"
-                    value={country.dial_code}
-                  >
-                    {country.dial_code}
-                  </option>
-                ))}
-              </select>
-              {/* <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-                <span className={formInputWarningCss}></span>
-              </label> */}
-            </div>
 
-            <div className="w-3/4 border-l pl-3 h-full border-slate-200">
-              <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-                <span className={formInputLabelCss}>Phone Number</span>
-              </label>
-              <input
-                type="text"
-                placeholder="********"
-                className={formInputCss}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-                <span className={formInputWarningCss}></span>
-              </label>
-            </div>
-          </div>
           <div className={formDivCss}>
             <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-              <span className={formInputLabelCss}>Birth of Date</span>
+              <span className={formInputLabelCss}>Phone</span>
             </label>
             <input
               type="text"
-              placeholder="DD/MM/YYYY"
+              placeholder="Phone"
               className={formInputCss}
-              name="dob"
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              disabled={true}
             />
             <label className="label lg:block sm:hidden">
               <span className={formInputWarningCss}></span>
             </label>
           </div>
-          <div className={formDivCss}>
+
+          {/* <div className={formDivCss}>
             <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
               <span className={formInputLabelCss}>Gender</span>
             </label>
@@ -241,66 +175,7 @@ const PersoalDetails = () => {
                 Others
               </option>
             </select>
-            {/* <label className="label lg:block sm:hidden">
-              <span className={formInputWarningCss}></span>
-            </label> */}
-          </div>
-
-          <div className={formDivCss}>
-            <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-              <span className={formInputLabelCss}>Country</span>
-            </label>
-            <select
-              type="select"
-              className={
-                "select lg:px-1 sm:px-0 border-info primary_text_color bg-info"
-              }
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              {countryData.map((country) => (
-                <option className="bg-info max-w-[300px]" value={country.name}>
-                  {country.name}
-                </option>
-              ))}
-            </select>
-            <label className="label lg:block sm:hidden">
-              <span className={formInputWarningCss}></span>
-            </label>
-          </div>
-          <div className={formDivCss}>
-            <label className="label  lg:py-[8px] sm:py-[4px] px-[4px] ">
-              <span className={formInputLabelCss}>Nationality</span>
-            </label>
-            <select
-              type="select"
-              className={
-                "select lg:px-1 sm:px-0 border-info primary_text_color bg-info"
-              }
-              value={nationality}
-              onChange={(e) => setNationality(e.target.value)}
-            >
-              <option className="bg-info max-w-[300px]" value={" "}>
-                Select Your Nationality
-              </option>
-              {countryData.map((country) => (
-                <option className="bg-info max-w-[300px]" value={country.name}>
-                  {country.name}
-                </option>
-              ))}
-            </select>
-            <label className="label lg:block sm:hidden">
-              <span className={formInputWarningCss}></span>
-            </label>
-          </div>
-          {/* 
-          <input
-            id="profileImage"
-            type="file"
-            name="img"
-            className="hidden"
-            onChange={(e) => setImage(e.target.value)}
-          /> */}
+          </div> */}
 
           <input
             type="submit"

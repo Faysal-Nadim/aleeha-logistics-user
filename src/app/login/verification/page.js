@@ -2,6 +2,7 @@
 
 import {
   requestCode,
+  sendVerificationCodeByEmail,
   verifyCode,
   verifyCodeForPassword,
 } from "@app/redux/actions";
@@ -27,7 +28,7 @@ const Verification = () => {
 
   useEffect(() => {
     const email = searchParams.get("email");
-    dispatch(requestCode({ email: email }));
+    dispatch(sendVerificationCodeByEmail({ email: email }));
     setEmail(email);
   }, [searchParams]);
 

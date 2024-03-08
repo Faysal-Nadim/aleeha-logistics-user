@@ -1,34 +1,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://AleehaLogistics.net/</loc>
+        <loc>https://aleeha.com.bd.net/</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/helpcenter</loc>
+        <loc>https://aleeha.com.bd.net/helpcenter</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/about-us</loc>
+        <loc>https://aleeha.com.bd.net/about-us</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/winners</loc>
+        <loc>https://aleeha.com.bd.net/blog</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/blog</loc>
+        <loc>https://aleeha.com.bd.net/faqs</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/faqs</loc>
+        <loc>https://aleeha.com.bd.net/profile</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
     <url>
-        <loc>https://AleehaLogistics.net/profile</loc>
-        <lastmod>2023-08-29T16:57:30+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://AleehaLogistics.net/cart</loc>
+        <loc>https://aleeha.com.bd.net/cart</loc>
         <lastmod>2023-08-29T16:57:30+00:00</lastmod>
     </url>
 </urlset>

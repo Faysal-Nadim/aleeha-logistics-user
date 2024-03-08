@@ -86,10 +86,6 @@ const Nav = () => {
                 {" "}
                 About Us
               </Link>
-              <Link rel="canonical" href={"/winners"}>
-                {" "}
-                Winners
-              </Link>
               <Link rel="canonical" href={"/product"}>
                 {" "}
                 Product

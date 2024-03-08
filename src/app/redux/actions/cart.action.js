@@ -8,7 +8,7 @@ export const getCartItems = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: cartConstants.CART_GET_REQUEST });
-      const res = await axiosInstance.get(`/user/cart/get`);
+      const res = await axiosInstance.get(`user/product/get-cart-products`);
 
       if (res.status === 200) {
         dispatch({

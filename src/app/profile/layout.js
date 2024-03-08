@@ -12,8 +12,6 @@ export default function ProfileLayout({ children }) {
         <ClientDashboardNav />
       </div>
 
-      {/* NEVIGATION PAGE LOADER DIV */}
-
       <Suspense fallback={<LoadingProfile />}>
         <div className="lg:w-3/4 sm:w-full">{children}</div>
       </Suspense>

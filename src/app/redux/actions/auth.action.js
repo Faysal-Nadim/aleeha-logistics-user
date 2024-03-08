@@ -7,7 +7,7 @@ export const login = (user) => {
   return async (dispatch) => {
     try {
       dispatch({ type: authConstant.LOGIN_REQUEST });
-      const res = await axiosInstance.post(`/user/auth/signin`, {
+      const res = await axiosInstance.post(`/auth/user/login`, {
         ...user,
       });
 
@@ -50,11 +50,11 @@ export const login = (user) => {
   };
 };
 
-export const signUp = (user) => {
+export const register = (user) => {
   return async (dispatch) => {
     try {
       dispatch({ type: authConstant.SIGNUP_REQUEST });
-      const res = await axiosInstance.post(`/user/auth/signup`, user);
+      const res = await axiosInstance.post(`/auth/user/registration`, user);
       if (res.status === 201) {
         dispatch({
           type: authConstant.SIGNUP_SUCCESS,
@@ -119,10 +119,10 @@ export const isUserLoggedIn = () => {
   };
 };
 
-export const signout = () => {
+export const logout = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.LOGOUT_REQUEST });
-    const res = await axiosInstance.get(`/user/auth/signout`);
+    const res = await axiosInstance.get(`/auth/user/logout`);
 
     if (res.status === 200) {
       localStorage.clear();
@@ -145,11 +145,13 @@ export const signout = () => {
   };
 };
 
-export const requestCode = (data) => {
+export const sendVerificationCodeByEmail = (data) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.CODE_REQUEST });
     try {
-      const res = await axiosInstance.post(`/user/auth/email/sendcode`, data);
+      const res = await axiosInstance.get(
+        `/auth/user/email/send-verification-code?email=${data.email}`
+      );
       if (res.status === 202) {
         dispatch({
           type: authConstant.CODE_SUCCESS,
@@ -250,61 +252,61 @@ export const verifyCodeForPassword = (data) => {
   };
 };
 
-export const updateImage = (form) => {
-  return async (dispatch) => {
-    const API = "b2b471ada4942812ae96473fbb15fa66";
-    await axios
-      .post(`https://api.imgbb.com/1/upload?key=${API}`, form)
-      .then(async (res) => {
-        const data = {
-          img: {
-            url: res?.data?.data?.display_url,
-          },
-        };
-        try {
-          dispatch({ type: authConstant.PICTURE_REQUEST });
-          const res = await axiosInstance.post(`/user/auth/update/img`, data);
+// export const updateImage = (form) => {
+//   return async (dispatch) => {
+//     const API = "b2b471ada4942812ae96473fbb15fa66";
+//     await axios
+//       .post(`https://api.imgbb.com/1/upload?key=${API}`, form)
+//       .then(async (res) => {
+//         const data = {
+//           img: {
+//             url: res?.data?.data?.display_url,
+//           },
+//         };
+//         try {
+//           dispatch({ type: authConstant.PICTURE_REQUEST });
+//           const res = await axiosInstance.post(`/user/auth/update/img`, data);
 
-          if (res.status === 200) {
-            const { user, msg } = res.data;
-            window.localStorage.setItem("user", JSON.stringify(user));
-            dispatch({
-              type: authConstant.PICTURE_SUCCESS,
-              payload: user,
-            });
-            Swal.fire({
-              icon: "success",
-              title: `${msg}`,
-              showConfirmButton: false,
-              timer: 1000,
-              iconColor: "#000",
-            }).then(() => {
-              window.location.reload();
-            });
-          }
-        } catch (err) {
-          const { data } = err.response;
-          dispatch({
-            type: authConstant.PICTURE_FAILURE,
-            payload: { msg: data.msg, status: err.response.status },
-          });
-          Swal.fire({
-            icon: "error",
-            title: `${data.msg}`,
-            showConfirmButton: false,
-            timer: 1500,
-            iconColor: "#000",
-          });
-        }
-      })
-      .catch((error) => {
-        dispatch({
-          type: authConstant.PICTURE_FAILURE,
-          payload: error,
-        });
-      });
-  };
-};
+//           if (res.status === 200) {
+//             const { user, msg } = res.data;
+//             window.localStorage.setItem("user", JSON.stringify(user));
+//             dispatch({
+//               type: authConstant.PICTURE_SUCCESS,
+//               payload: user,
+//             });
+//             Swal.fire({
+//               icon: "success",
+//               title: `${msg}`,
+//               showConfirmButton: false,
+//               timer: 1000,
+//               iconColor: "#000",
+//             }).then(() => {
+//               window.location.reload();
+//             });
+//           }
+//         } catch (err) {
+//           const { data } = err.response;
+//           dispatch({
+//             type: authConstant.PICTURE_FAILURE,
+//             payload: { msg: data.msg, status: err.response.status },
+//           });
+//           Swal.fire({
+//             icon: "error",
+//             title: `${data.msg}`,
+//             showConfirmButton: false,
+//             timer: 1500,
+//             iconColor: "#000",
+//           });
+//         }
+//       })
+//       .catch((error) => {
+//         dispatch({
+//           type: authConstant.PICTURE_FAILURE,
+//           payload: error,
+//         });
+//       });
+//   };
+// };
 
 export const updateProfile = (data) => {
   return async (dispatch) => {
@@ -331,42 +333,6 @@ export const updateProfile = (data) => {
       const { data } = err.response;
       dispatch({
         type: authConstant.PROFILE_UPDATE_FAILURE,
-        payload: { msg: data.msg, status: err.response.status },
-      });
-      Swal.fire({
-        icon: "error",
-        title: `${data.msg}`,
-        showConfirmButton: false,
-        timer: 1500,
-        iconColor: "#000",
-      });
-    }
-  };
-};
-
-export const updateNotification = (data) => {
-  return async (dispatch) => {
-    try {
-      Swal.showLoading();
-      dispatch({ type: authConstant.NOTIFICATION_REQUEST });
-      const res = await axiosInstance.post(
-        `/user/auth/update/notification`,
-        data
-      );
-
-      if (res.status === 200) {
-        const { user, msg } = res.data;
-        window.localStorage.setItem("user", JSON.stringify(user));
-        dispatch({
-          type: authConstant.NOTIFICATION_SUCCESS,
-          payload: user,
-        });
-        Swal.close();
-      }
-    } catch (err) {
-      const { data } = err.response;
-      dispatch({
-        type: authConstant.NOTIFICATION_FAILURE,
         payload: { msg: data.msg, status: err.response.status },
       });
       Swal.fire({

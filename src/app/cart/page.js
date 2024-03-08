@@ -10,16 +10,9 @@ import {
   removeCart,
   updateCart,
 } from "@app/redux/actions";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
-import { api } from "@app/redux/helpers/urlConfig";
 import axiosInstance from "@app/redux/helpers/axios";
-import { CheckOutForm } from "@components/CheckOutForm";
 import ReactModal from "react-modal";
-import { StripeGateway } from "@components/Stripe";
 import { useRouter } from "next/navigation";
 import withAuth from "@components/withAuth";
 
@@ -44,7 +37,6 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    // backgroundColor: "#1A1A1A",
     backgroundColor: "#eeeeee",
     padding: 50,
     borderRadius: 20,
@@ -67,8 +59,8 @@ const CartPage = () => {
   const [methods, setMethods] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState(null);
 
-  const [stripePromise, setStripePromise] = useState(null);
-  const [clientSecret, setClientSecret] = useState("");
+  const [totalQty, setTotalQty] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -79,21 +71,6 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.auth.user);
 
-  const userData = JSON.parse(window.localStorage.getItem("user"));
-  useEffect(() => {
-    Swal.showLoading();
-    const data = { customer: userData.stripe_id };
-    axiosInstance
-      .post(`/payment/stripe/get-payment-methods`, data)
-      .then(async (res) => {
-        setMethods(res.data.methods);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    Swal.close();
-  }, []);
-
   const handleCart = ({ productData, qty }) => {
     const item = {
       _id: productData.campaign._id,
@@ -102,28 +79,34 @@ const CartPage = () => {
     dispatch(updateCart(item, qty));
   };
 
-  let totalItem = cart.cartItems
-    ? Object.keys(cart.cartItems).reduce(function (qty, key) {
-        return qty + cart.cartItems[key].qty;
-      }, 0)
-    : 0;
+  function calculateTotal(cart) {
+    let totalQty = 0;
+    let totalPrice = 0;
 
-  let productTotal = cart.cartItems
-    ? Object.keys(cart.cartItems).reduce((totalPrice, key) => {
-        const { price, qty } = cart.cartItems[key];
-        return totalPrice + price * qty;
-      }, 0)
-    : 0;
+    // Iterate through each item in the cart
+    cart?.length > 0 &&
+      cart?.forEach((item) => {
+        // Iterate through each variation of the item
+        item.variations.forEach((variation) => {
+          // Add the quantity of this variation to the total quantity
+          totalQty += variation.qty;
+          // Add the total price of this variation to the total price
+          totalPrice += variation.payable * variation.qty;
+        });
+      });
 
-  let totalPrice =
-    (cart.cartItems
-      ? Object.keys(cart.cartItems).reduce((totalPrice, key) => {
-          const { price, qty } = cart.cartItems[key];
-          return totalPrice + price * qty;
-        }, 0)
-      : 0) + +(exchangeProductWithTickets === true ? 0 : 35);
+    // Return an object containing the total quantity and total price
+    return {
+      totalQty: totalQty,
+      totalPrice: totalPrice.toFixed(2),
+    };
+  }
 
-  let vat = 0.0;
+  useEffect(() => {
+    const total = calculateTotal(cart);
+    setTotalQty(total.totalQty);
+    setTotalPrice(total.totalPrice);
+  }, [cart]);
 
   const handleOrder = async (cart, trxID) => {
     const order = {
@@ -147,23 +130,6 @@ const CartPage = () => {
     dispatch(orderPlace(order));
   };
 
-  // useEffect(() => {
-  //   axiosInstance.get(`/payment/stripe/get-key`).then(async (res) => {
-  //     const { publishableKey } = await res.data;
-  //     setStripePromise(loadStripe(publishableKey));
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   const data = { amount: totalPrice };
-  //   axiosInstance
-  //     .post(`/payment/stripe/create-intent`, data)
-  //     .then(async (res) => {
-  //       const { clientSecret } = await res.data;
-  //       setClientSecret(clientSecret);
-  //     });
-  // }, []);
-
   const handleCartCount = (item) => {
     const data = {
       _id: item._id,
@@ -171,156 +137,109 @@ const CartPage = () => {
     dispatch(removeCart(data));
   };
 
-  // const createOrder = (data) => {
-  //   // Order is created on the server and the order id is returned
-  //   return fetch(`${api}/payment/paypal/create-order`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     // use the "body" param to optionally pass additional order information
-  //     // like product skus and quantities
-  //     body: JSON.stringify({
-  //       amount: totalPrice,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((order) => order.id);
-  // };
-  // const onApprove = (data) => {
-  //   // Order is captured on the server and the response is returned to the browser
-  //   return fetch(`${api}/payment/paypal/capture-order`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       orderID: data.orderID,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.status === "COMPLETED") {
-  //         Swal.showLoading();
-  //         handleOrder(cart.cartItems);
-  //       } else {
-  //         Swal.fire({
-  //           icon: "error",
-  //           text: "Payment Was Not Completed",
-  //           showConfirmButton: false,
-  //           timer: 1500,
-  //         });
-  //       }
-  //     });
-  // };
   const router = useRouter();
-
-  const handlePaymentMethod = (paymentMethod) => {
-    if (paymentMethod && paymentMethod === "NewCard") {
-      setShow(true);
-    } else if (paymentMethod && paymentMethod !== null) {
-      const data = {
-        customer_id: userData.stripe_id,
-        payment_id: paymentMethod,
-        amount: totalPrice,
-        email: userData.email,
-      };
-      Swal.showLoading();
-      axiosInstance
-        .post(`/payment/stripe/charge-saved-card`, data)
-        .then(async (res) => {
-          await handleOrder(cart.cartItems, res.data.id);
-        })
-        .catch((error) => {
-          const { data } = error.response;
-          Swal.fire({
-            icon: "error",
-            title: "Card Validation Failed!",
-            text: `${data.msg}`,
-            iconColor: "#000",
-          }).then(() => {
-            window.location.reload();
-          });
-        });
-    }
-  };
 
   return (
     <div>
       <div className="flex lg:flex-row sm:flex-col justify-between items-start gap-4">
-        <div className="  max-w-[936px] lg:w-8/12 sm:w-full mx-auto">
+        <div className="lg:w-12/12 sm:w-full mx-auto">
           <p className="prim_text_2xl mb-8">Cart</p>
+
           {/* PRODUCT */}
-          <div className="lg:p-6 sm:p-4 shadow-lg rounded-[24px] grid grid-cols-1 gap-8 bg_sec max-w-[936px]">
-            {cart?.cartItems && cart?.cartItems.length > 0 ? (
-              cart?.cartItems?.map((item, index) => {
+          <div className="lg:p-5 sm:p-3 shadow-lg rounded-[24px] grid grid-cols-1 gap-8 bg_sec">
+            <div className="lg:flex sm:hidden lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8 font-bold ">
+              <p>Product Details</p>
+              <div className="flex gap-8">
+                <p className="lg:min-w-[210px] md:min-w-[130px] sm:min-w-[80px]">
+                  Meta
+                </p>
+                <p className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px]">
+                  Quantity
+                </p>
+                <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px]">
+                  Unit Price
+                </p>
+                <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px]">
+                  Total Price
+                </p>
+              </div>
+            </div>
+            {cart && cart?.length > 0 ? (
+              cart?.map((item, index) => {
                 return (
                   <>
                     <div
                       key={index}
-                      className="flex lg:flex-row md:flex-row sm:flex-col justify-between items-center gap-6"
+                      className="flex lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8"
                     >
                       {/* INFO */}
-                      <div className="flex gap-6 justify-start items-center rounded-2xl">
+                      <div className="flex gap-4 justify-start items-center rounded-xl">
                         <Image
-                          src={
-                            item?.campaign?.img?.product !== null
-                              ? item?.campaign?.img?.product
-                              : "https://i.ibb.co/fFnnXLZ/shopping-cart.png"
-                          }
-                          height={127}
-                          width={137}
-                          alt={item?.campaign?.product + " image"}
-                          className="rounded-3xl"
+                          src={item?.image}
+                          height={100}
+                          width={100}
+                          alt={item?.title}
+                          className="rounded-xl"
                         />
 
                         <div>
-                          <p className="prim_text_lg">
-                            {" "}
-                            {item?.campaign?.productTitle}{" "}
+                          <p className="prim_text_exlg lg:text-[16px] md:text-[14px] sm:text-[13px]  max-w-[350px]">
+                            {item?.title}
                           </p>
                           <p className="sec_text_md_reg">
-                            Win {item?.campaign?.title}
+                            {item?.shippingCategory}, BDT {item?.shippingRate}
+                            /KG
                           </p>
-                          <p className="font-bold text-[20px] font-sora text-primary-red mt-1 lg:mb-4 sm:mb-1">
-                            AED {item?.price}
+                          <p className="font-bold text-[12px] font-sora text-primary-red mt-1 lg:mb-4 sm:mb-1">
+                            Domestic Delivery: BDT {item?.ddc}*
                           </p>
-                          {/* <p className="">
-                            You Will Get{" "}
-                            <span className="text-success">
-                              {exchangeProductWithTickets === true
-                                ? item?.campaign?.ticketQty
-                                : item?.campaign?.ticketQtyGen}{" "}
-                              Tickets
-                            </span>
-                          </p> */}
                         </div>
                       </div>
                       {/* COUNT */}
-                      <div className="flex lg:gap-2 sm:gap-2 justify-center items-center ">
-                        <button
-                          type=""
-                          className="btn_gray_update bg-info  "
-                          onClick={() =>
-                            item.qty <= 1
-                              ? handleCartCount(item)
-                              : handleCart({ productData: item, qty: -1 })
-                          }
-                        >
-                          <p className="text-black">-</p>
-                        </button>
-                        <button type="" className="btn_gray_update bg-neutral">
-                          <p className="text-black">{item?.qty}</p>
-                        </button>
-                        <button
-                          type=""
-                          className="btn_gray_update bg-info"
-                          onClick={() =>
-                            handleCart({ productData: item, qty: 1 })
-                          }
-                        >
-                          <p className="text-black">+</p>
-                        </button>
+                      <div className="flex flex-col gap-8 lg:text-[14px] md:text-[13px] sm:text-[12px]">
+                        {item?.variations.map((meta, index) => (
+                          <div className="flex lg:gap-8 md:gap-4 sm:gap-2 lg:items-center md:items-start sm:items-start">
+                            <div className="flex flex-col gap-4 ">
+                              {meta?.meta.map((m, i) => (
+                                <p className="font-sora lg:w-[210px] md:w-[130px] sm:w-[80px]">
+                                  <span className="font-semibold">
+                                    {m?.name?.toUpperCase()}:
+                                  </span>{" "}
+                                  {m?.value}
+                                </p>
+                              ))}
+                            </div>
+
+                            <div className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px] max-h-[40px] flex border border-slate-300 rounded-[4px]">
+                              <button className="w-3/12 p-1 border-r border-r-slate-300 text-[#F79602] font-bold text-[16px]">
+                                -
+                              </button>
+                              <p className="w-6/12 p-1 flex justify-center items-center text-center">
+                                {meta?.qty}
+                              </p>
+                              <button className="w-3/12 p-1  border-l border-l-slate-300 text-[#F79602] font-bold text-[16px]">
+                                +
+                              </button>
+                            </div>
+
+                            <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
+                              <p className="lg:block md:block sm:hidden">
+                                BDT {meta?.payable}
+                              </p>
+                              <p className="lg:hidden md:hidden sm:block">
+                                {meta?.payable}
+                              </p>
+                            </div>
+                            <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
+                              <p className="lg:block md:block sm:hidden">
+                                BDT {meta?.payable * meta?.qty}
+                              </p>
+                              <p className="lg:hidden md:hidden sm:block">
+                                {meta?.payable * meta?.qty}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </>
@@ -338,155 +257,90 @@ const CartPage = () => {
                 </button>
               </div>
             )}
-            {/* EXCHANGE WITH WXTRA PRODUCT */}
-            {cart?.cartItems && cart?.cartItems?.length > 0 && (
-              <div className="flex justify-start items-center gap-2 mt-8">
-                <input
-                  id="exeProductWithTkt"
-                  type="checkbox"
-                  checked={exchangeProductWithTickets}
-                  // value={exchangeProductWithTickets}
-                  onClick={() =>
-                    setExchangeProductWithTickets(!exchangeProductWithTickets)
-                  }
-                  className="checkbox checkbox-success"
-                />
-                <label
-                  htmlFor="exeProductWithTkt"
-                  className="prim_text_lg primary_text_color cursor-pointer select-none "
-                >
-                  Exchange your product with a Ticket
-                </label>
-              </div>
-            )}
           </div>
         </div>
-        <div className="lg:max-w-[391px] lg:w-4/12 sm:w-full mx-auto">
-          {/*TOTAL  */}
-          <div className="bg_sec rounded-xl shadow-lg">
-            <div className="flex justify-between items-center p-6 border-b border-b-neutral">
-              <div className="">
-                <p className="prim_text_2xl font-bold  ">Total</p>
-                <p className="sec_text_md ">Including VAT</p>
-              </div>
-              <p className="text-primary-red text-[32px] font-bold">
-                AED {totalPrice <= 0 ? 0 : totalPrice + vat}
-              </p>
-            </div>
+      </div>
 
-            <div className="p-6 ">
-              <p className="mb-2 flex justify-between items-center sec_text_md_reg">
-                <span>Sub Total</span>
-                <span>+ AED {productTotal}</span>
+      <div className="w-full mx-auto">
+        {/*TOTAL  */}
+        <div className="bg_sec rounded-xl shadow-lg">
+          <div className="flex justify-between items-center p-6 border-b border-b-neutral">
+            <div className="">
+              <p className="prim_text_2xl font-bold  ">Total</p>
+              <p className="sec_text_md_reg">{totalQty} Items</p>
+            </div>
+            <div className="">
+              <p className="text-primary-red text-[20px] font-bold">
+                BDT {totalPrice <= 0 ? 0 : totalPrice}
               </p>
-              {exchangeProductWithTickets === true ? (
-                ""
-              ) : (
-                <p className="mb-2  flex justify-between items-center sec_text_md_reg">
-                  <span>Delivery Charge</span>
-                  <span>+ AED 35</span>
-                </p>
-              )}
-              <p className="mb-2  flex justify-between items-center sec_text_md_reg">
-                <span>VAT</span>
-                <span>+ AED {vat}</span>
-              </p>
-              <p className="mb-2  flex justify-between items-center sec_text_md_reg">
-                <span>Wallet Balance</span>
-                <span>- AED {}</span>
+              <p className="sec_text_md_reg ">
+                <span className="text-primary-red text-[20px]">*</span>
+                Shipping & Customs Charge Is Not Included
               </p>
             </div>
-            <div></div>
           </div>
 
-          {/* ADDRESS */}
+          <div className="p-6 ">
+            <p className="mb-2  flex justify-between items-center sec_text_md_reg">
+              <span>VAT</span>
+              <span>+ BDT 0.00</span>
+            </p>
+          </div>
+          <div></div>
+        </div>
 
-          {exchangeProductWithTickets === false ? (
-            <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
-              <p className="prim_text_2xl font-bold mb-4">Address</p>
+        {/* ADDRESS */}
 
-              <input
-                type="text"
-                placeholder="Apartment"
-                value={apartment}
-                onChange={(e) => setApartment(e.target.value)}
-                className={cardInputCss}
-              />
+        <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
+          <p className="prim_text_2xl font-bold mb-4">Address</p>
 
-              <div className="flex lg:flex-row sm:flex-col gap-2">
-                <input
-                  type="text"
-                  placeholder="City"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className={cardInputCss}
-                />
+          <input
+            type="text"
+            placeholder="Apartment"
+            value={apartment}
+            onChange={(e) => setApartment(e.target.value)}
+            className={cardInputCss}
+          />
 
-                <input
-                  type="text"
-                  placeholder="Postal Code"
-                  value={zipCode}
-                  onChange={(e) => setZipCode(e.target.value)}
-                  className={cardInputCss}
-                />
-              </div>
+          <div className="flex lg:flex-row sm:flex-col gap-2">
+            <input
+              type="text"
+              placeholder="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className={cardInputCss}
+            />
 
-              <textarea
-                className={addressInputCss}
-                // className="textarea textarea-bordered"
-                placeholder="Detailed Address"
-                value={detailAddress}
-                onChange={(e) => setDetailAddress(e.target.value)}
-              ></textarea>
-            </div>
-          ) : (
-            ""
-          )}
+            <input
+              type="text"
+              placeholder="Postal Code"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              className={cardInputCss}
+            />
+          </div>
 
-          <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
-            <p className="prim_text_2xl font-bold mb-4">Saved Cards</p>
-            {methods?.map((card) => (
-              <button
-                key={card.id}
-                className={
-                  "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
-                }
-                onClick={() => setPaymentMethod(card.id)}
-              >
-                <span className="flex gap-2 items-center">
-                  {paymentMethod === card.id ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        fill="#fff"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  ) : (
-                    <div className="w-6 h-6"></div>
-                  )}
-                  <p className="secondary_text_color">
-                    **** **** **** {card?.card?.last4}
-                  </p>
+          <textarea
+            className={addressInputCss}
+            // className="textarea textarea-bordered"
+            placeholder="Detailed Address"
+            value={detailAddress}
+            onChange={(e) => setDetailAddress(e.target.value)}
+          ></textarea>
+        </div>
 
-                  {/* {isProcessing ? "Processing ... " : "Pay now"} */}
-                </span>
-              </button>
-            ))}
+        <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
+          <p className="prim_text_2xl font-bold mb-4">Saved Cards</p>
+          {methods?.map((card) => (
             <button
+              key={card.id}
               className={
                 "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
               }
-              onClick={() => setPaymentMethod("NewCard")}
+              onClick={() => setPaymentMethod(card.id)}
             >
-              <div className="flex gap-2 items-center">
-                {paymentMethod === "NewCard" ? (
+              <span className="flex gap-2 items-center">
+                {paymentMethod === card.id ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -504,83 +358,76 @@ const CartPage = () => {
                   <div className="w-6 h-6"></div>
                 )}
                 <p className="secondary_text_color">
-                  {" "}
-                  Continue With A New Card
+                  **** **** **** {card?.card?.last4}
                 </p>
+
                 {/* {isProcessing ? "Processing ... " : "Pay now"} */}
-              </div>
+              </span>
             </button>
-          </div>
-          {/* PLACE ORDER BTN */}
+          ))}
           <button
-            type=""
             className={
-              "mt-4 border-0 normal-case btn flex justify-center items-center bg-primary w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
+              "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
             }
-            disabled={
-              cart?.cartItems?.length > 0 && paymentMethod !== null
-                ? false
-                : true
-            }
-            onClick={() => handlePaymentMethod(paymentMethod)}
+            onClick={() => setPaymentMethod("NewCard")}
           >
-            <span
-              id="button-text"
-              className={
-                cart?.cartItems?.length > 0 && paymentMethod !== null
-                  ? "secondary_text_color"
-                  : "hidden"
-              }
-            >
-              Place Order
+            <div className="flex gap-2 items-center">
+              {paymentMethod === "NewCard" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    fill="#fff"
+                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <div className="w-6 h-6"></div>
+              )}
+              <p className="secondary_text_color"> Continue With A New Card</p>
               {/* {isProcessing ? "Processing ... " : "Pay now"} */}
-            </span>
+            </div>
           </button>
-
-          {/* <div className="border-t mt-6 bg-white p-6 rounded-xl"> */}
-          {/* {stripePromise && clientSecret && (
-              <Elements
-                stripe={stripePromise}
-                options={{ clientSecret: clientSecret }}
-              >
-                <CheckOutForm exchage={exchangeProductWithTickets} />
-              </Elements>
-            )} */}
-          {/* <PayPalScriptProvider
-              options={{
-                clientId:
-                  "AcPVGkuznKPH6ieoGq4iOLnLnq1IXGDs04c6ePFlKsACcipfTZLcb1lmanOhE8YRw8wYeVYOjTaYoQLV",
-              }}
-            >
-              <PayPalButtons
-                forceReRender={[totalPrice]}
-                createOrder={(data, actions) => createOrder(data, actions)}
-                onApprove={(data, actions) => onApprove(data, actions)}
-              />
-            </PayPalScriptProvider> */}
-          {/* </div> */}
-          {/* <div>
-            <button
-              onClick={() => handleOrder(cart.cartItems)}
-              type=""
-              className="mt-4 normal-case btn flex justify-center items-center bg-primary w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
-            >
-              Place Order
-            </button>
-          </div> */}
         </div>
+        {/* PLACE ORDER BTN */}
+        <button
+          type=""
+          className={
+            "mt-4 border-0 normal-case btn flex justify-center items-center bg-primary w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
+          }
+          disabled={
+            cart?.cartItems?.length > 0 && paymentMethod !== null ? false : true
+          }
+          onClick={() => handlePaymentMethod(paymentMethod)}
+        >
+          <span
+            id="button-text"
+            className={
+              cart?.cartItems?.length > 0 && paymentMethod !== null
+                ? "secondary_text_color"
+                : "hidden"
+            }
+          >
+            Place Order
+            {/* {isProcessing ? "Processing ... " : "Pay now"} */}
+          </span>
+        </button>
       </div>
-
       <ReactModal
         isOpen={show}
         style={customStyles}
         onRequestClose={() => setShow(false)}
       >
-        <StripeGateway
+        {/* <StripeGateway
           totalPrice={totalPrice}
           exchangeProductWithTickets={exchangeProductWithTickets}
           address={`${apartment}, ${detailAddress}, ${city} ${zipCode}`}
-        />
+        /> */}
       </ReactModal>
     </div>
   );
