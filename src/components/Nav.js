@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartItems } from "@app/redux/actions";
 import { useRouter } from "next/navigation";
 import { alLogo } from "../../public/assets/images";
+import SearchComponent from "./navbar/SearchComponent";
 
 const Nav = () => {
   const auth = useSelector((state) => state.auth);
@@ -54,7 +55,7 @@ const Nav = () => {
               {!auth.authenticate && (
                 <>
                   <Link rel="canonical" href="/login">
-                    {/* <div className="prim_text_lg_reg">Login</div> */}
+                    {/* <div className="prim_text_md_reg">Login</div> */}
                     <div className="btn_outline_sm primary_text_color text-[12px] uppercase font-semibold">
                       Login
                     </div>
@@ -77,16 +78,17 @@ const Nav = () => {
               </label>
             </div>
             {/* LEFT SIDE NAV ITEMS */}
-            <div className="prim_text_lg_reg justify-center items-center gap-4  hidden lg:flex">
+            <div className="prim_text_md_reg justify-center items-center gap-4  hidden lg:flex">
               {/* <Link href={"/product"}> Products</Link> */}
+              <Link rel="canonical" href={"/"}>
+                {" "}
+                Home
+              </Link>
               <Link rel="canonical" href={"/helpcenter"}>
                 {" "}
                 Contact Us
               </Link>
-              <Link rel="canonical" href={"/about-us"}>
-                {" "}
-                About Us
-              </Link>
+
               <Link rel="canonical" href={"/product"}>
                 {" "}
                 Product
@@ -100,15 +102,21 @@ const Nav = () => {
 
               {!auth.authenticate ? (
                 <>
+                  <li className="">
+                    <SearchComponent />
+                  </li>
                   <li>
                     <Link rel="canonical" href="/login">
-                      {/* <div className="prim_text_lg_reg">Login</div> */}
-                      <div className="btn_outline prim_text_lg_reg">Login</div>
+                      {/* <div className="prim_text_md_reg">Login</div> */}
+                      <div className="btn_outline prim_text_md_reg">Login</div>
                     </Link>
                   </li>
                 </>
               ) : (
                 <>
+                  <li className="">
+                    <SearchComponent />
+                  </li>
                   <li className="">
                     {
                       <Link rel="canonical" href="/cart">

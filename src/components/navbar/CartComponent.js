@@ -13,7 +13,7 @@ const CartComponent = () => {
     : 0;
 
   return (
-    <div className="prim_text_lg_reg flex  items-center gap-2">
+    <div className="prim_text_md_reg flex  items-center gap-2">
       {cartSvgRED}
       <p className="flex gap-1 items-center">
         {/* <span className="lg:block md:hidden sm:hidden">Cart</span> */}

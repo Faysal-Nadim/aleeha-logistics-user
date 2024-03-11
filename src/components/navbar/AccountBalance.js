@@ -11,7 +11,7 @@ const AccountBalance = () => {
         <div className="border-l h-[34px] border-slate-100 pl-4"></div>
         <div className="flex flex-col items-end">
           <p className="sec_text_sm offset_color">Available Balance </p>
-          <p className="prim_text_md">AED {user?.wallet?.available}</p>
+          <p className="prim_text_md">BDT {user?.wallet?.available || 0.0}</p>
         </div>
         <div
           className={

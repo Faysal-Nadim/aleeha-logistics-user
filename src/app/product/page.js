@@ -1403,74 +1403,102 @@ export default function page() {
       <div>
         <div className="">
           {/* PRODUCTS */}
-          <div className=" ">
-            <div className="flex flex-wrap justify-center items-center gap-x-2 lg:gap-y-3">
-              {products?.items.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className=" rounded-[8px] relative lg:h-[410px] lg:w-[280px] sm:h-[300px] sm:w-[140px] lg:mb-5 sm:mb-2 cursor-pointer"
+          <div className="flex flex-wrap gap-6 justify-center">
+            {products?.items.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className=" rounded-[8px]  cursor-pointer lg:max-w-[214px] sm:max-w-[140px]"
+                >
+                  <Image
+                    src={item?.img}
+                    height={214}
+                    width={214}
+                    alt={item?.title}
+                    className="opacity-0 rounded-[8px] border border-[#f8f8f8] shadow lg:h-[214px] lg:w-[214px] sm:h-[140px] sm:w-[140px] transition-opacity duration-1000"
+                    onLoadingComplete={(img) =>
+                      img.classList.remove("opacity-0")
+                    }
                     onClick={() =>
                       window.open(
                         `/product/${encodeURIComponent(item?.product_url)}`
                       )
                     }
-                  >
-                    <Image
-                      src={item?.img}
-                      height={280}
-                      width={280}
-                      alt={item?.title}
-                      className="opacity-0 rounded-t-[8px] lg:h-[280px] lg:w-[280px] sm:h-[140px] sm:w-[140px] transition-opacity duration-1000"
-                      onLoadingComplete={(img) =>
-                        img.classList.remove("opacity-0")
-                      }
-                    />
+                  />
 
+                  <div
+                    style={
+                      {
+                        // backgroundColor: "#F3F4F6",
+                      }
+                    }
+                    className=" bottom-0 rounded-bl-[8px] rounded-br-[8px] w-full min-h-[100px] p-2"
+                  >
                     <div
-                      style={{
-                        backgroundColor: "#F3F4F6",
-                      }}
-                      className="bg_prim bottom-0 rounded-bl-[8px] rounded-br-[8px] w-full min-h-[140px] p-3"
+                      onClick={() =>
+                        window.open(
+                          `/product/${encodeURIComponent(item?.product_url)}`
+                        )
+                      }
                     >
-                      <p className="md:text-[14px] sm:text-[10px]   font-sora">
-                        {item?.title?.slice(0, 30)}...
+                      <p className="lg:text-[12px] md:text-[12px] sm:text-[10px]  font-semibold font-sora">
+                        {item?.title?.slice(0, 50)}..
                       </p>
-                      <p className="md:text-[16px] sm:text-[14px] text-[#F79602] font-bold  font-sora">
-                        {"BDT "} {(item?.price * 21).toFixed(2)}
+                      <p className="lg:text-[10px] md:text-[10px] sm:text-[8px] mt-1.5   font-sora  ">
+                        {item?.sale_info?.sale_quantity}+ Sold
                       </p>
-                      <p className="md:text-[14px] sm:text-[10px]   font-sora  border-b border-b-black mb-3">
-                        {item?.sale_info?.sale_quantity} Sold
+                      <p className="lg:text-[10px] md:text-[10px] sm:text-[8px]">
+                        Seller: {item?.shop_info?.company_name.slice(0, 36)}..
                       </p>
-                      <div className="flex lg:my-0 sm:my-auto gap-2 justify-between items-center">
+                    </div>
+
+                    <div className="flex justify-between items-center mt-2">
+                      <p className="lg:text-[10px] md:text-[10px] sm:text-[8px] text-[#F79602] font-bold  font-sora">
+                        {"BDT "}{" "}
+                        <span className="lg:text-[18px] md:text-[14px] sm:text-[12px] text-[#F79602] font-bold  font-sora">
+                          {(item?.price * 21).toFixed(2)}
+                        </span>
+                      </p>
+
+                      <Link
+                        href={`/product/${encodeURIComponent(
+                          item?.product_url
+                        )}`}
+                        target="_blank"
+                        className="lg:text-[12px] sm:text-[8px] bg-[#000] hover:bg-[#f79502d2] transition-all ease-in-out px-4 lg:py-1.5 sm:py-1.5 rounded-[40px] text-[16px] font-bold text-[#fff] "
+                      >
+                        View Seller
+                      </Link>
+                    </div>
+
+                    {/*<div className="flex lg:my-0 sm:my-auto gap-2 justify-between items-center">
                         <p className="sm:text-[11px] lg:text-[13px]">
                           Seller: {item?.shop_info?.company_name.slice(0, 10)}..
-                        </p>
-                        <Link
+                        </p> 
+                       <Link
                           href={`/product/${encodeURIComponent(
                             item?.product_url
                           )}`}
                           target="_blank"
-                          className="lg:text-[16px] sm:text-[10px] bg-[#fff] px-4 lg:py-2 sm:py-2 rounded-[6px] text-[16px] font-semibold primary_text_color "
+                          className="lg:text-[12px] sm:text-[10px] bg-[#000] px-4 lg:py-1.5 sm:py-1.5 rounded-[40px] text-[16px] font-semibold text-[#fff] "
                         >
                           View Seller
-                        </Link>
-                      </div>
-                    </div>
+                        </Link> 
+                      </div>*/}
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <ProductsDetails
+      {/* <ProductsDetails
         show={show}
         setShow={setShow}
         priceDetails={priceDetails}
         handleCart={handleCart}
-      />
+      /> */}
     </div>
   );
 }

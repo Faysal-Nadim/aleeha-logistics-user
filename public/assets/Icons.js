@@ -1,6 +1,6 @@
 //LOGO
 
-const logo = (
+export const logo = (
   <svg
     width="110"
     height="43"
@@ -61,7 +61,7 @@ const logo = (
 );
 
 // NAV
-const cartSvg = (
+export const cartSvg = (
   <svg
     width="20"
     height="20"
@@ -75,7 +75,7 @@ const cartSvg = (
     />
   </svg>
 );
-const cartSvgDark = (
+export const cartSvgDark = (
   <svg
     width="24"
     height="24"
@@ -89,23 +89,32 @@ const cartSvgDark = (
     />
   </svg>
 );
-
-const cartSvgRED = (
+export const searchSvg = (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    className="w-4 h-4 opacity-70"
   >
     <path
-      d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
-      fill="#FF3624"
+      fillRule="evenodd"
+      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+      clipRule="evenodd"
     />
   </svg>
 );
+export const cartSvgRED = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className="w-5 h-5"
+  >
+    <path d="M1 1.75A.75.75 0 0 1 1.75 1h1.628a1.75 1.75 0 0 1 1.734 1.51L5.18 3a65.25 65.25 0 0 1 13.36 1.412.75.75 0 0 1 .58.875 48.645 48.645 0 0 1-1.618 6.2.75.75 0 0 1-.712.513H6a2.503 2.503 0 0 0-2.292 1.5H17.25a.75.75 0 0 1 0 1.5H2.76a.75.75 0 0 1-.748-.807 4.002 4.002 0 0 1 2.716-3.486L3.626 2.716a.25.25 0 0 0-.248-.216H1.75A.75.75 0 0 1 1 1.75ZM6 17.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM15.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+  </svg>
+);
 
-const userSvg = (
+export const userSvg = (
   <svg
     width="20"
     height="20"
@@ -127,7 +136,7 @@ const userSvg = (
   </svg>
 );
 
-const navToggleSvg = (
+export const navToggleSvg = (
   // <svg
   //   width="19"
   //   height="15"
@@ -156,7 +165,7 @@ const navToggleSvg = (
   </svg>
 );
 
-const emailSVG = (
+export const emailSVG = (
   <svg
     width="19"
     height="15"
@@ -173,7 +182,7 @@ const emailSVG = (
   </svg>
 );
 
-const arrowDown = (
+export const arrowDown = (
   <svg
     width="12"
     height="6"
@@ -185,7 +194,7 @@ const arrowDown = (
   </svg>
 );
 
-const person = (
+export const person = (
   <svg
     width="24"
     height="24"
@@ -200,7 +209,7 @@ const person = (
   </svg>
 );
 
-const wallet = (
+export const wallet = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -215,7 +224,7 @@ const wallet = (
   </svg>
 );
 
-const offer = (
+export const offer = (
   <svg
     width="24"
     height="24"
@@ -234,7 +243,7 @@ const offer = (
   </svg>
 );
 
-const active_ticket = (
+export const active_ticket = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -251,7 +260,7 @@ const active_ticket = (
   </svg>
 );
 
-const notification = (
+export const notification = (
   <svg
     width="24"
     height="24"
@@ -266,7 +275,7 @@ const notification = (
   </svg>
 );
 
-const wishlist = (
+export const wishlist = (
   <svg
     width="24"
     height="24"
@@ -281,7 +290,7 @@ const wishlist = (
   </svg>
 );
 
-const payment_options = (
+export const payment_options = (
   <svg
     width="24"
     height="24"
@@ -296,7 +305,7 @@ const payment_options = (
   </svg>
 );
 
-const logout = (
+export const logout = (
   <svg
     width="24"
     height="24"
@@ -311,7 +320,7 @@ const logout = (
   </svg>
 );
 
-const settiing = (
+export const settiing = (
   <svg
     width="24"
     height="24"
@@ -334,7 +343,7 @@ const settiing = (
   </svg>
 );
 
-const moreHorizontal = (
+export const moreHorizontal = (
   <svg
     width="20"
     height="4"
@@ -348,7 +357,7 @@ const moreHorizontal = (
   </svg>
 );
 
-const eyeSvg = (
+export const eyeSvg = (
   <svg
     width="24"
     height="24"
@@ -363,7 +372,7 @@ const eyeSvg = (
   </svg>
 );
 
-const closePopUp = (
+export const closePopUp = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
@@ -374,7 +383,7 @@ const closePopUp = (
   </svg>
 );
 
-const calenderSvg = (
+export const calenderSvg = (
   <svg
     width="25"
     height="25"
@@ -391,7 +400,7 @@ const calenderSvg = (
   </svg>
 );
 
-const closeBtn = (
+export const closeBtn = (
   <svg
     width="24"
     height="24"
@@ -406,7 +415,7 @@ const closeBtn = (
   </svg>
 );
 
-const LeftArrowWhite = (
+export const LeftArrowWhite = (
   <svg
     width="25"
     height="25"
@@ -421,7 +430,7 @@ const LeftArrowWhite = (
   </svg>
 );
 
-const LeftArrowBlack = (
+export const LeftArrowBlack = (
   <svg
     width="25"
     height="25"
@@ -436,7 +445,7 @@ const LeftArrowBlack = (
   </svg>
 );
 
-const RightArrowWhite = (
+export const RightArrowWhite = (
   <svg
     width="25"
     height="25"
@@ -451,7 +460,7 @@ const RightArrowWhite = (
   </svg>
 );
 
-const RightArrowBlack = (
+export const RightArrowBlack = (
   <svg
     width="25"
     height="25"
@@ -466,7 +475,7 @@ const RightArrowBlack = (
   </svg>
 );
 
-const shoppingBagYellow = (
+export const shoppingBagYellow = (
   <svg
     width="24"
     height="24"
@@ -481,7 +490,7 @@ const shoppingBagYellow = (
   </svg>
 );
 
-const shareSvg = (
+export const shareSvg = (
   <svg
     width="25"
     height="25"
@@ -496,7 +505,7 @@ const shareSvg = (
   </svg>
 );
 
-const clock = (
+export const clock = (
   <svg
     width="20"
     height="20"
@@ -513,7 +522,7 @@ const clock = (
   </svg>
 );
 
-const winnerTicket = (
+export const winnerTicket = (
   <svg
     width="34"
     height="34"
@@ -544,7 +553,7 @@ const winnerTicket = (
   </svg>
 );
 
-const trofy = (
+export const trofy = (
   <svg
     width="24"
     height="24"
@@ -559,7 +568,7 @@ const trofy = (
   </svg>
 );
 
-const modalCloseBtn = (
+export const modalCloseBtn = (
   <svg
     width="30"
     height="30"
@@ -573,38 +582,3 @@ const modalCloseBtn = (
     />
   </svg>
 );
-
-export {
-  shoppingBagYellow,
-  modalCloseBtn,
-  clock,
-  trofy,
-  winnerTicket,
-  shareSvg,
-  LeftArrowWhite,
-  RightArrowWhite,
-  LeftArrowBlack,
-  RightArrowBlack,
-  closeBtn,
-  closePopUp,
-  calenderSvg,
-  eyeSvg,
-  offer,
-  moreHorizontal,
-  logout,
-  settiing,
-  notification,
-  payment_options,
-  wishlist,
-  logo,
-  cartSvg,
-  cartSvgDark,
-  cartSvgRED,
-  userSvg,
-  navToggleSvg,
-  arrowDown,
-  person,
-  wallet,
-  active_ticket,
-  emailSVG,
-};

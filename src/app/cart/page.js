@@ -269,7 +269,7 @@ const CartPage = () => {
               <p className="prim_text_2xl font-bold  ">Total</p>
               <p className="sec_text_md_reg">{totalQty} Items</p>
             </div>
-            <div className="">
+            <div className="flex flex-col  items-end">
               <p className="text-primary-red text-[20px] font-bold">
                 BDT {totalPrice <= 0 ? 0 : totalPrice}
               </p>
@@ -291,56 +291,89 @@ const CartPage = () => {
 
         {/* ADDRESS */}
 
-        <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
-          <p className="prim_text_2xl font-bold mb-4">Address</p>
-
-          <input
-            type="text"
-            placeholder="Apartment"
-            value={apartment}
-            onChange={(e) => setApartment(e.target.value)}
-            className={cardInputCss}
-          />
-
-          <div className="flex lg:flex-row sm:flex-col gap-2">
-            <input
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              className={cardInputCss}
-            />
+        <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-6">
+          <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
+            <p className="prim_text_2xl font-bold mb-4">Address</p>
 
             <input
               type="text"
-              placeholder="Postal Code"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
+              placeholder="Apartment"
+              value={apartment}
+              onChange={(e) => setApartment(e.target.value)}
               className={cardInputCss}
             />
+
+            <div className="flex lg:flex-row sm:flex-col gap-2">
+              <input
+                type="text"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className={cardInputCss}
+              />
+
+              <input
+                type="text"
+                placeholder="Postal Code"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                className={cardInputCss}
+              />
+            </div>
+
+            <textarea
+              className={addressInputCss}
+              // className="textarea textarea-bordered"
+              placeholder="Detailed Address"
+              value={detailAddress}
+              onChange={(e) => setDetailAddress(e.target.value)}
+            ></textarea>
           </div>
 
-          <textarea
-            className={addressInputCss}
-            // className="textarea textarea-bordered"
-            placeholder="Detailed Address"
-            value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
-          ></textarea>
-        </div>
+          <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
+            <p className="prim_text_2xl font-bold mb-4">Saved Cards</p>
+            {methods?.map((card) => (
+              <button
+                key={card.id}
+                className={
+                  "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
+                }
+                onClick={() => setPaymentMethod(card.id)}
+              >
+                <span className="flex gap-2 items-center">
+                  {paymentMethod === card.id ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        fill="#fff"
+                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <div className="w-6 h-6"></div>
+                  )}
+                  <p className="secondary_text_color">
+                    **** **** **** {card?.card?.last4}
+                  </p>
 
-        <div className="bg_sec rounded-xl shadow-lg mt-6 p-6">
-          <p className="prim_text_2xl font-bold mb-4">Saved Cards</p>
-          {methods?.map((card) => (
+                  {/* {isProcessing ? "Processing ... " : "Pay now"} */}
+                </span>
+              </button>
+            ))}
             <button
-              key={card.id}
               className={
                 "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
               }
-              onClick={() => setPaymentMethod(card.id)}
+              onClick={() => setPaymentMethod("NewCard")}
             >
-              <span className="flex gap-2 items-center">
-                {paymentMethod === card.id ? (
+              <div className="flex gap-2 items-center">
+                {paymentMethod === "NewCard" ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -358,42 +391,15 @@ const CartPage = () => {
                   <div className="w-6 h-6"></div>
                 )}
                 <p className="secondary_text_color">
-                  **** **** **** {card?.card?.last4}
+                  {" "}
+                  Continue With A New Card
                 </p>
-
                 {/* {isProcessing ? "Processing ... " : "Pay now"} */}
-              </span>
+              </div>
             </button>
-          ))}
-          <button
-            className={
-              "mt-4 border-0 normal-case btn flex justify-center items-center bg-[#1a1a1a] w-full  rounded-xl text-[14px] font-semibold font-sora primary_text_color"
-            }
-            onClick={() => setPaymentMethod("NewCard")}
-          >
-            <div className="flex gap-2 items-center">
-              {paymentMethod === "NewCard" ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    fill="#fff"
-                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) : (
-                <div className="w-6 h-6"></div>
-              )}
-              <p className="secondary_text_color"> Continue With A New Card</p>
-              {/* {isProcessing ? "Processing ... " : "Pay now"} */}
-            </div>
-          </button>
+          </div>
         </div>
+
         {/* PLACE ORDER BTN */}
         <button
           type=""
