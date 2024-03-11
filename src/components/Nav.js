@@ -11,6 +11,7 @@ import AccountBalance from "./navbar/AccountBalance";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItems } from "@app/redux/actions";
 import { useRouter } from "next/navigation";
+import { alLogo } from "../../public/assets/images";
 
 const Nav = () => {
   const auth = useSelector((state) => state.auth);
@@ -34,15 +35,15 @@ const Nav = () => {
           <div className="flex lg:justify-center sm:justify-between lg:w-auto sm:w-full items-center lg:gap-4 sm:gap-4">
             <Image
               className="lg:block sm:hidden mb-2 cursor-pointer"
-              src={logo}
+              src={alLogo}
               alt="AleehaLogistics logo"
-              height={33}
-              width={90}
+              height={110}
+              width={110}
               onClick={() => router.push("/")}
             />
             <Image
               className="lg:hidden sm:block mb-2 cursor-pointer"
-              src={logo}
+              src={alLogo}
               alt="AleehaLogistics logo"
               height={23}
               width={60}

@@ -20,8 +20,8 @@ export default function RootLayout({ children }) {
           name="description"
           content="Get ready to win with AleehaLogistics's Monthly Draw. Option to score fantastic prizes. Join now for your shot at some great rewards."
         />
-        <link rel="icon" href="./icon.svg" sizes="any" />
-        <title>AleehaLogistics Monthly Draw - Win Great Prizes</title>
+        <link rel="icon" href="./icon.png" sizes="any" />
+        <title>Aleeha Logistics</title>
         <Script
           defer
           id="G-41FB2GZZX5"

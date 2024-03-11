@@ -1439,7 +1439,7 @@ export default function page() {
                       <p className="md:text-[16px] sm:text-[14px] text-[#F79602] font-bold  font-sora">
                         {"BDT "} {(item?.price * 21).toFixed(2)}
                       </p>
-                      <p className="md:text-[14px] sm:text-[10px]   font-sora  border-b border-b-success mb-3">
+                      <p className="md:text-[14px] sm:text-[10px]   font-sora  border-b border-b-black mb-3">
                         {item?.sale_info?.sale_quantity} Sold
                       </p>
                       <div className="flex lg:my-0 sm:my-auto gap-2 justify-between items-center">

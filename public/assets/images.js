@@ -2,6 +2,8 @@ import dubaided from "./footer/dubaided.png";
 import dubaidedwhite from "./footer/dubaidedw.png";
 import dubaided_black_long from "./footer/dubaied_black_long.png";
 import dubaided_black_horizontal from "./footer/dubaided_black_horizontal.png";
+import alLogo from "./AL_Logo.png";
+import logo720 from "./logo_720.png";
 
 //LOADING
 import loadingAnimation from "./logo/Winly-Logo-1.png";
@@ -34,4 +36,6 @@ export {
   OrderSuccess,
   hero_winner_red_landing_page,
   hero_winner_red_blog,
+  alLogo,
+  logo720,
 };

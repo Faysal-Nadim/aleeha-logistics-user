@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 /**
@@ -12,7 +12,59 @@ export const MultiSku = ({
   displayImage,
   setDisplayImage,
   data,
+  selectedProductSKU,
+  setSelectedProductSKU,
 }) => {
+  let variations = [];
+
+  const [shippingCategory, setShippingCategory] = useState(null);
+  const [shippingRate, setShippingRate] = useState(0);
+  const [productTotal, setProductTotal] = useState(0);
+  const [totalItem, setTotalItem] = useState(0);
+
+  const handleProductVariation = (skudata) => {
+    window.localStorage.setItem("product", JSON.stringify(variations));
+    if (skudata.qty > 0) {
+      const vdata = JSON.parse(window.localStorage.getItem("product"));
+      vdata.push({
+        qty: skudata.qty,
+        price: skudata.skuProduct.sale_price,
+        payable: skudata.skuProduct.sale_price * 21,
+        metaKey: skudata.skuProduct.props_names,
+        meta: [
+          {
+            name: data?.sku_props[0]?.prop_name,
+            value: selectedProductColor.name,
+            img: selectedProductColor.imageUrl,
+          },
+        ],
+        skuid: skudata.skuProduct.skuid,
+      });
+      variations = vdata;
+      window.localStorage.setItem("product", JSON.stringify(vdata));
+    }
+  };
+
+  useEffect(() => {
+    const totalQty =
+      variations.length > 0
+        ? Object.keys(variations).reduce(function (qty, key) {
+            return qty + variations[key].qty;
+          }, 0)
+        : 0;
+    const total =
+      variations.length > 0
+        ? Object.keys(variations).reduce((totalPrice, key) => {
+            const { payable, qty } = variations[key];
+            return totalPrice + payable * qty;
+          }, 0)
+        : 0;
+    setProductTotal(total.toFixed(2));
+    setTotalItem(totalQty);
+  }, [variations]);
+
+  console.log(variations);
+
   return (
     <div className="w-full flex lg:flex-row md:flex-row sm:flex-col justify-center items-start gap-10 mb-12">
       <div className="max-w-[340px]">
@@ -59,7 +111,7 @@ export const MultiSku = ({
 
         <div className="mb-4">
           <p className="mb-2 font-semibold">
-            Color:{" "}
+            {data?.sku_props[0].prop_name.toUpperCase()}:{" "}
             <span className="uppercase">{selectedProductColor?.name}</span>
           </p>
 
@@ -149,14 +201,46 @@ export const MultiSku = ({
               );
               console.log(skuProduct);
 
+              handleProductVariation({
+                qty: qty,
+                skuProduct: skuProduct,
+              });
+
               return (
                 <div className="flex gap-2  justify-between px-4 mb-4 text-[14px] font-bold ">
                   <p className="lg:w-[120px] md:w-[60px] sm:w-[40px] text-[#5D6154]">
-                    {x?.name}
+                    {x?.imageUrl === null ||
+                    x?.imageUrl === undefined ||
+                    x?.imageUrl === "" ? (
+                      x?.name
+                    ) : (
+                      <Image
+                        key={i}
+                        onClick={() => {
+                          setDisplayImage(
+                            x?.imageUrl === null ||
+                              x?.imageUrl === undefined ||
+                              x?.imageUrl === ""
+                              ? data.main_imgs[0]
+                              : x?.imageUrl
+                          );
+                          setSelectedProductSKU(x);
+                        }}
+                        src={x?.imageUrl}
+                        height={50}
+                        width={50}
+                        alt=""
+                        className={
+                          selectedProductColor?.vid === x?.vid
+                            ? "rounded-lg shadow cursor-pointer border-2 p-0.5 border-[#F79602]"
+                            : "rounded-lg shadow cursor-pointer border  p-0.5 border-[#ECECEC]"
+                        }
+                      />
+                    )}
                   </p>
 
                   <p className="lg:w-[120px] md:w-[60px] sm:w-[40px] text-[#5D6154]">
-                    {skuProduct?.sale_price}
+                    {(skuProduct?.sale_price * 21).toFixed(2)}
                   </p>
                   <p className="lg:w-[120px] md:w-[60px] sm:w-[40px] text-[#5D6154]">
                     {skuProduct?.stock === undefined || skuProduct?.stock <= 0
@@ -168,21 +252,37 @@ export const MultiSku = ({
                       Out Of Stock
                     </div>
                   ) : (
-                    <div className="lg:w-[150px] md:w-[120px] sm:w-[80px] max-h-[40px] flex border border-slate-300 rounded-[4px]">
+                    <div
+                      id={x?.vid}
+                      className="lg:w-[150px] md:w-[120px] sm:w-[80px] max-h-[40px] flex border border-slate-300 rounded-[4px]"
+                    >
                       <button
-                        className="w-2/12 p-1 border-r border-r-slate-300"
+                        className="w-3/12 p-1 border-r border-r-slate-300"
                         disabled={qty === 0 ? true : false}
-                        onClick={() => setQty((v) => v - 1)}
+                        onClick={() => {
+                          setQty(qty - 1);
+                          setSelectedProductSKU(x);
+                        }}
                       >
                         -
                       </button>
-                      <div className="w-8/12 p-1 flex justify-center items-center">
-                        <span className="">{qty}</span>
-                      </div>
+                      {/* <div className="w-6/12 p-1 flex justify-center items-center"> */}
+                      <input
+                        className="w-6/12 p-1 flex justify-center items-center text-center"
+                        value={qty}
+                        onChange={(e) => {
+                          setQty(Number(e.target.value));
+                          setSelectedProductSKU(x);
+                        }}
+                      />
+                      {/* </div> */}
                       <button
-                        className="w-2/12 p-1  border-l border-l-slate-300"
+                        className="w-3/12 p-1  border-l border-l-slate-300"
                         disabled={qty === x?.stock ? true : false}
-                        onClick={() => setQty((v) => v + 1)}
+                        onClick={() => {
+                          setQty(qty + 1);
+                          setSelectedProductSKU(x);
+                        }}
                       >
                         +
                       </button>
@@ -197,7 +297,7 @@ export const MultiSku = ({
       <div className="lg:max-w-[270px] md:max-w-[270px] sm:w-full">
         <div className="bg-[#F9F9F9] rounded-lg p-4 mb-8">
           <div className="flex justify-between gap-1.5   font-semibold  mb-3">
-            <p>0 Pieces</p>
+            <p>{totalItem} Pieces</p>
             <p>BDT 0 </p>
           </div>
           <div className="flex justify-between gap-1.5   font-semibold  mb-6">

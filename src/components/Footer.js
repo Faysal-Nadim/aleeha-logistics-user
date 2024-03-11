@@ -14,6 +14,7 @@ import {
   visa,
   android_icon,
   apple_icon,
+  logo720,
 } from "../../public/assets/images";
 
 const Footer = () => {
@@ -120,12 +121,19 @@ const Footer = () => {
       {/* 1ST PART */}
       <div className="relative flex flex-col justify-center  p-10 bg_sec rounded-[16px]">
         <div className="w-full grid lg:grid-cols-4 sm:grid-cols-1 justify-between items-start gap-8">
-          <div className="flex flex-col lg:justify-center md:justify-start sm:justify-start items-center">
+          <div className="flex flex-col lg:justify-start md:justify-start sm:justify-start items-start">
             <Image
-              className="lg:h-[55px] lg:w-[141px] sm:h-[24px] sm:w-[61px] mb-2"
-              src={logo}
+              className="lg:h-[120px] lg:w-[220px] sm:h-[24px] sm:w-[61px] mb-2"
+              src={logo720}
               alt="Picture of the lgoo"
             />
+            <p className="font-sora text-[24px]">Aleeha Logistics</p>
+            <p className="font-sora text-[14px]">
+              KA 96/1, Kazibari, Kuril
+              <br />
+              Dhaka 1229
+            </p>
+            <p className="font-sora text-[14px]">+880 1825 930 641</p>
           </div>
 
           <div className="flex flex-col lg:mx-auto md:mx-0 sm:mx-0 gap-4">
