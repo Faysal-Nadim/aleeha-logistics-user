@@ -68,8 +68,8 @@ const CartPage = () => {
     dispatch(getCartItems());
   }, []);
 
-  const cart = useSelector((state) => state.cart.cart);
-  const user = useSelector((state) => state.auth.user);
+  const cart = useSelector((state) => state?.cart?.cart);
+  const user = useSelector((state) => state?.auth?.user);
 
   const handleCart = ({ productData, qty }) => {
     const item = {
@@ -147,106 +147,105 @@ const CartPage = () => {
 
           {/* PRODUCT */}
           <div className="lg:p-5 sm:p-3 shadow-lg rounded-[24px] grid grid-cols-1 gap-8 bg_sec">
-            <div className="lg:flex sm:hidden lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8 font-bold ">
-              <p>Product Details</p>
-              <div className="flex gap-8">
-                <p className="lg:min-w-[210px] md:min-w-[130px] sm:min-w-[80px]">
-                  Meta
-                </p>
-                <p className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px]">
-                  Quantity
-                </p>
-                <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px]">
-                  Unit Price
-                </p>
-                <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px]">
-                  Total Price
-                </p>
-              </div>
-            </div>
             {cart && cart?.length > 0 ? (
-              cart?.map((item, index) => {
-                return (
-                  <>
-                    <div
-                      key={index}
-                      className="flex lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8"
-                    >
-                      {/* INFO */}
-                      <div className="flex gap-4 justify-start items-center rounded-xl">
-                        <Image
-                          src={item?.image}
-                          height={100}
-                          width={100}
-                          alt={item?.title}
-                          className="rounded-xl"
-                        />
+              <>
+                <div className="lg:flex sm:hidden lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8 prim_text_md_reg font-semibold ">
+                  <p className="underline">Product Details</p>
+                  <div className="flex gap-8">
+                    <p className="lg:min-w-[210px] md:min-w-[130px] sm:min-w-[80px] underline">
+                      Meta
+                    </p>
+                    <p className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px] underline">
+                      Quantity
+                    </p>
+                    <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] underline">
+                      Unit Price
+                    </p>
+                    <p className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] underline">
+                      Total Price
+                    </p>
+                  </div>
+                </div>
+                {cart?.map((item, index) => {
+                  return (
+                    <>
+                      <div
+                        key={index}
+                        className="flex lg:flex-row md:flex-row sm:flex-col justify-between items-start gap-8"
+                      >
+                        <div className="flex gap-4 justify-start items-center rounded-xl">
+                          <Image
+                            src={item?.image}
+                            height={100}
+                            width={100}
+                            alt={item?.title}
+                            className="rounded-xl"
+                          />
 
-                        <div>
-                          <p className="prim_text_exlg lg:text-[16px] md:text-[14px] sm:text-[13px]  max-w-[350px]">
-                            {item?.title}
-                          </p>
-                          <p className="sec_text_md_reg">
-                            {item?.shippingCategory}, BDT {item?.shippingRate}
-                            /KG
-                          </p>
-                          <p className="font-bold text-[12px] font-sora text-primary-red mt-1 lg:mb-4 sm:mb-1">
-                            Domestic Delivery: BDT {item?.ddc}*
-                          </p>
+                          <div>
+                            <p className="prim_text_exlg lg:text-[16px] md:text-[14px] sm:text-[13px]  max-w-[350px]">
+                              {item?.title}
+                            </p>
+                            <p className="sec_text_md_reg">
+                              {item?.shippingCategory}, BDT {item?.shippingRate}
+                              /KG
+                            </p>
+                            <p className="font-bold text-[12px] font-sora text-primary-red mt-1 lg:mb-4 sm:mb-1">
+                              Domestic Delivery: BDT {item?.ddc}*
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-8 lg:text-[14px] md:text-[13px] sm:text-[12px]">
+                          {item?.variations.map((meta, index) => (
+                            <div className="flex lg:gap-8 md:gap-4 sm:gap-2 lg:items-center md:items-start sm:items-start">
+                              <div className="flex flex-col gap-4 ">
+                                {meta?.meta.map((m, i) => (
+                                  <p className="font-sora lg:w-[210px] md:w-[130px] sm:w-[80px]">
+                                    <span className="font-semibold">
+                                      {m?.name?.toUpperCase()}:
+                                    </span>{" "}
+                                    {m?.value}
+                                  </p>
+                                ))}
+                              </div>
+
+                              <div className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px] max-h-[40px] flex border border-slate-300 rounded-[4px]">
+                                <button className="w-3/12 p-1 border-r border-r-slate-300 text-[#F79602] font-bold text-[16px]">
+                                  -
+                                </button>
+                                <p className="w-6/12 p-1 flex justify-center items-center text-center">
+                                  {meta?.qty}
+                                </p>
+                                <button className="w-3/12 p-1  border-l border-l-slate-300 text-[#F79602] font-bold text-[16px]">
+                                  +
+                                </button>
+                              </div>
+
+                              <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
+                                <p className="lg:block md:block sm:hidden">
+                                  BDT {meta?.payable}
+                                </p>
+                                <p className="lg:hidden md:hidden sm:block">
+                                  {meta?.payable}
+                                </p>
+                              </div>
+                              <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
+                                <p className="lg:block md:block sm:hidden">
+                                  BDT {meta?.payable * meta?.qty}
+                                </p>
+                                <p className="lg:hidden md:hidden sm:block">
+                                  {meta?.payable * meta?.qty}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                      {/* COUNT */}
-                      <div className="flex flex-col gap-8 lg:text-[14px] md:text-[13px] sm:text-[12px]">
-                        {item?.variations.map((meta, index) => (
-                          <div className="flex lg:gap-8 md:gap-4 sm:gap-2 lg:items-center md:items-start sm:items-start">
-                            <div className="flex flex-col gap-4 ">
-                              {meta?.meta.map((m, i) => (
-                                <p className="font-sora lg:w-[210px] md:w-[130px] sm:w-[80px]">
-                                  <span className="font-semibold">
-                                    {m?.name?.toUpperCase()}:
-                                  </span>{" "}
-                                  {m?.value}
-                                </p>
-                              ))}
-                            </div>
-
-                            <div className="lg:min-w-[150px] md:min-w-[120px] sm:min-w-[80px] max-h-[40px] flex border border-slate-300 rounded-[4px]">
-                              <button className="w-3/12 p-1 border-r border-r-slate-300 text-[#F79602] font-bold text-[16px]">
-                                -
-                              </button>
-                              <p className="w-6/12 p-1 flex justify-center items-center text-center">
-                                {meta?.qty}
-                              </p>
-                              <button className="w-3/12 p-1  border-l border-l-slate-300 text-[#F79602] font-bold text-[16px]">
-                                +
-                              </button>
-                            </div>
-
-                            <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
-                              <p className="lg:block md:block sm:hidden">
-                                BDT {meta?.payable}
-                              </p>
-                              <p className="lg:hidden md:hidden sm:block">
-                                {meta?.payable}
-                              </p>
-                            </div>
-                            <div className="lg:min-w-[100px] md:min-w-[80px] sm:min-w-[50px] font-semibold">
-                              <p className="lg:block md:block sm:hidden">
-                                BDT {meta?.payable * meta?.qty}
-                              </p>
-                              <p className="lg:hidden md:hidden sm:block">
-                                {meta?.payable * meta?.qty}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                );
-              })
+                    </>
+                  );
+                })}
+              </>
             ) : (
-              // <p className="prim_text_lg text-center">This cart is empty!</p>
               <div className="min-h-[183px] p-6 flex flex-col justify-center items-center">
                 <p className="prim_text_lg_reg mb-3">Cart is empty!</p>
                 <button
@@ -270,11 +269,11 @@ const CartPage = () => {
               <p className="sec_text_md_reg">{totalQty} Items</p>
             </div>
             <div className="flex flex-col  items-end">
-              <p className="text-primary-red text-[20px] font-bold">
+              <p className="text-primary-red font-mr text-[24px] font-bold">
                 BDT {totalPrice <= 0 ? 0 : totalPrice}
               </p>
               <p className="sec_text_md_reg ">
-                <span className="text-primary-red text-[20px]">*</span>
+                <span className="text-primary-red prim_text_md_reg">*</span>
                 Shipping & Customs Charge Is Not Included
               </p>
             </div>

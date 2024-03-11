@@ -1408,14 +1408,14 @@ export default function page() {
               return (
                 <div
                   key={index}
-                  className=" rounded-[8px]  cursor-pointer lg:max-w-[214px] sm:max-w-[140px]"
+                  className=" rounded-[8px]  cursor-pointer lg:max-w-[214px] sm:max-w-[160px]"
                 >
                   <Image
                     src={item?.img}
                     height={214}
                     width={214}
                     alt={item?.title}
-                    className="opacity-0 rounded-[8px] border border-[#f8f8f8] shadow lg:h-[214px] lg:w-[214px] sm:h-[140px] sm:w-[140px] transition-opacity duration-1000"
+                    className="opacity-0 rounded-[8px] border border-[#f8f8f8] shadow lg:h-[214px] lg:w-[214px] sm:h-[160px] sm:w-[160px] transition-opacity duration-1000"
                     onLoadingComplete={(img) =>
                       img.classList.remove("opacity-0")
                     }

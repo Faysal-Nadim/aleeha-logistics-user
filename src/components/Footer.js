@@ -119,21 +119,18 @@ const Footer = () => {
   return (
     <div className="flex flex-col lg:gap-[22px] max-w-[1280px] mx-auto w-full sm:gap-1 py-6 lg:px-6 sm:px-4 mt-8">
       {/* 1ST PART */}
-      <div className="relative flex flex-col justify-center  p-10 bg_sec rounded-[16px]">
+      <div className="relative flex flex-col justify-center  p-10 bg-[#f8f8f8] rounded-[16px]">
         <div className="w-full grid lg:grid-cols-4 sm:grid-cols-1 justify-between items-start gap-8">
-          <div className="flex flex-col lg:justify-start md:justify-start sm:justify-start items-start">
+          <div className="flex flex-col  items-start">
             <Image
-              className="lg:h-[120px] lg:w-[220px] sm:h-[24px] sm:w-[61px] mb-2"
+              className="lg:h-[120px] lg:w-[220px] sm:h-[60px] sm:w-[110px] mb-2"
               src={logo720}
               alt="Picture of the lgoo"
             />
-            <p className="font-sora text-[24px]">Aleeha Logistics</p>
-            <p className="font-sora text-[14px]">
-              KA 96/1, Kazibari, Kuril
-              <br />
-              Dhaka 1229
+            <p className="prim_text_md_reg mb-0.5 ml-2 ">
+              KA 96/1, Kazibari, Kuril Dhaka 1229
             </p>
-            <p className="font-sora text-[14px]">+880 1825 930 641</p>
+            <p className="prim_text_md_reg ml-2">+880 1825 930 641</p>
           </div>
 
           <div className="flex flex-col lg:mx-auto md:mx-0 sm:mx-0 gap-4">
@@ -192,14 +189,14 @@ const Footer = () => {
         </div>
 
         <div className="w-full flex justify-center items-center">
-          <div className="p-2 bg_sec absolute  lg:w-11/12 sm:w-full  rounded-[6px] lg:bottom-[-10px] sm:bottom-0" />
+          <div className="p-2 bg-[#f8f8f8] absolute  lg:w-11/12 sm:w-full  rounded-[6px] lg:bottom-[-10px] sm:bottom-0" />
         </div>
       </div>
 
       {/* 2nd PART */}
 
-      <div className="relative w-full flex justify-center items-center p-10 bg_sec rounded-[16px]">
-        <div className="p-2 bg_sec absolute  lg:w-11/12 sm:w-full  rounded-[6px] lg:top-[-10px] sm:top-0" />
+      <div className="relative w-full flex justify-center items-center p-10 bg-[#f8f8f8] rounded-[16px]">
+        <div className="p-2 bg-[#f8f8f8] absolute  lg:w-11/12 sm:w-full  rounded-[6px] lg:top-[-10px] sm:top-0" />
         <div className=" w-full flex lg:justify-center sm:justify-between gap-10 lg:items-center sm:items-start ">
           <div className="flex lg:flex-row sm:flex-col justify-center sm:items-start lg:items-center gap-3">
             {legacy?.map((x, index) => {
@@ -214,14 +211,14 @@ const Footer = () => {
                 </Link>
               );
             })}
-            <div className="flex flex-wrap  items-center gap-1">
+            {/* <div className="flex flex-wrap  items-center gap-1">
               <p className="prim_text_md_reg"> We Accept</p>
               <div className="flex  justify-center items-center gap-1">
                 <Image src={mc} height={10} width={37} alt="mastercard" />
                 <Image src={visa} height={25} width={30} alt="visa" />
                 <Image src={ae} height={22} width={22} alt="american express" />
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="">

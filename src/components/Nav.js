@@ -27,7 +27,7 @@ const Nav = () => {
   return (
     <>
       {/* BEFORE NAV BAR SPACE */}
-      <div className="py-5 w-full bg-[#F8F8F8] relative"></div>
+      <div className="py-5 w-full bg-[#fff] relative"></div>
       <div className="max-w-[1280px] mx-auto w-full  px-4  mb-2  relative top-[-16px] ">
         <div className=""></div>
         {/* bg-[#EEEEEE] */}
@@ -81,17 +81,13 @@ const Nav = () => {
             <div className="prim_text_md_reg justify-center items-center gap-4  hidden lg:flex">
               {/* <Link href={"/product"}> Products</Link> */}
               <Link rel="canonical" href={"/"}>
-                {" "}
                 Home
               </Link>
-              <Link rel="canonical" href={"/helpcenter"}>
-                {" "}
-                Contact Us
-              </Link>
-
               <Link rel="canonical" href={"/product"}>
-                {" "}
                 Product
+              </Link>
+              <Link rel="canonical" href={"/helpcenter"}>
+                Contact Us
               </Link>
             </div>
           </div>
